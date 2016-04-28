@@ -3,8 +3,14 @@ html {
 	overflow-y: hidden;
 }
 #bg{
-	position: absolute;
+	position: fixed;
 }
 #tizai{
-	position: absolute;
+	position: fixed;
+}
+.describeOfPlace{
+	display: none;
+}
+.rule .qes_and_ans .result .achievement{
+	display: none;
 }
