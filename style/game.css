@@ -1,0 +1,16 @@
+html {
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+#bg{
+	position: fixed;
+}
+#tizai{
+	position: fixed;
+}
+.describeOfPlace{
+	display: none;
+}
+.rule .qes_and_ans .result .achievement{
+	display: none;
+}
