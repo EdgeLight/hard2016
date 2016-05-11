@@ -3,38 +3,69 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="style/000.css">
+	<link rel="stylesheet" type="text/css" href="style/game.css">
 	<title>华难毕业大学</title>
 </head>
 <body>
 	<div id="bg">
+		<img src="resource/01.png" alt="" class="bg">
+		<img src="resource/02.png" alt="" class="bg">
+		<img src="resource/03.png" alt="" class="bg">
+		<img src="resource/04.png" alt="" class="bg">
+		<img src="resource/05.png" alt="" class="bg">
+		<img src="resource/06.png" alt="" class="bg">
+		<img src="resource/07.png" alt="" class="bg">
+		<img src="resource/08.png" alt="" class="bg">
+		<img src="resource/09.png" alt="" class="bg">
+		<img src="resource/10.png" alt="" class="bg">
+		<img src="resource/11.png" alt="" class="bg">
+		<img src="resource/12.png" alt="" class="bg">
+		<img src="resource/13.png" alt="" class="bg">
+		<img src="resource/14.png" alt="" class="bg">
+		<img src="resource/15.png" alt="" class="bg">
+		<img src="resource/16.png" alt="" class="bg">
+		<img src="resource/17.png" alt="" class="bg">
+		<img src="resource/18.png" alt="" class="bg">
+		<img src="resource/19.png" alt="" class="bg">
+		<img src="resource/20.png" alt="" class="bg">
+		<img src="resource/21.png" alt="" class="bg">
+		<img src="resource/22.png" alt="" class="bg">
+		<img src="resource/23.png" alt="" class="bg">
+		<img src="resource/24.png" alt="" class="bg">
+		<img src="resource/25.png" alt="" class="bg">
+		<img src="resource/26.png" alt="" class="bg">
+		<img src="resource/27.png" alt="" class="bg">
+		<img src="resource/28.png" alt="" class="bg">
+		<img src="resource/29.png" alt="" class="bg">
+		<img src="resource/30.png" alt="" class="bg">
+		<img src="resource/31.png" alt="" class="bg">
+		<img src="resource/32.png" alt="" class="bg">
 	</div>
 	<div id="tizai">
-		<img src="resource/man.png">
 	</div>
 	
-	<div class="describeOfPlace"></div>
-	<div class="rule">
+	<div class="rule popover">
 		<div class="text"></div>
-		<div class="button" data-name="确定"></div>
+		<div class="button" data-name="游戏开始"><p>游戏开始</p></div>
 	</div>
-	<div class="qes_and_ans">
+	<div class="qes_and_ans popover">
 		<div class="question"></div>
-		<div class="button" data-name="A">A</div>
-		<div class="button" data-name="B">B</div>
-		<div class="button" data-name="C">C</div>
-		<div class="button" data-name="D">D</div>
+		<div class="choose" data-name="A"></div>
+		<div class="choose" data-name="B"></div>
+		<div class="choose" data-name="C"></div>
+		<div class="choose" data-name="D"></div>
+		<div class="button" data-name="确定"><p>确定</p></div>
 	</div>
-	<div class="result">
+	<div class="result popover">
 		<div class="text"></div>
-		<div class="button" data-nameOne="再来一次" data-nameTwo="继续答题"></div>
+		<div class="button" data-name1="继续" data-name2="再来一次"></div>
 	</div>
-	<div class="achievement">
+	<div class="achievement popover">
 		<div class="text"></div>
 		<div class="picture"></div>
 	</div>
 
 	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
-	<script type="text/javascript" src="js/000.js"></script>
+	<script type="text/javascript" src="js/game.js"></script>
 </body>
 </html>
