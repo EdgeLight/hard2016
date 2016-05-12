@@ -252,8 +252,10 @@ function jump(desT, desL,type) { //梯仔跳跃动画函数
 }
 
 function change(mode) { //改变梯仔gif的函数
-	if (mode == 4) {
+	if (mode == 5) {
+		setTimeout(function(){
 		_tizai.html("<img src='./resource/three.gif'>");
+		},2000);
 		setTimeout(function() {
 			_tizai.html("<img src='./resource/two.gif'>");
 		}, 5000);
@@ -261,13 +263,13 @@ function change(mode) { //改变梯仔gif的函数
 			_tizai.html("<img src='./resource/one.gif'>");
 		}, 5500);
 	}
-	if (mode == 7) {
+	if (mode == 8) {
 		_tizai.html("<img src='./resource/four.gif'>");
 		setTimeout(function() {
 			_tizai.html("<img src='./resource/one.gif'>");
 		}, 5000);
 	}
-	if (mode == 10) {
+	if (mode == 11) {
 		_tizai.html("<img src='./resource/four.gif'>");
 		setTimeout(function() {
 			_tizai.html("<img src='./resource/one.gif'>");
@@ -278,7 +280,7 @@ function change(mode) { //改变梯仔gif的函数
 				"-moz-transform": "skew(0deg,180deg)"});
 		}, 5000);
 	}
-	if (mode == 14) {
+	if (mode == 15) {
 		_tizai.html("<img src='./resource/four.gif'>");
 		setTimeout(function() {
 			_tizai.html("<img src='./resource/one.gif'>");
@@ -289,7 +291,7 @@ function change(mode) { //改变梯仔gif的函数
 				"-moz-transform": "skew(0deg,180deg)"});
 		},5000);
 	}
-	if (mode == 19) {
+	if (mode == 20) {
 		_tizai.html("<img src='./resource/four.gif'>");
 		setTimeout(function() {
 			_tizai.html("<img src='./resource/one.gif'>");

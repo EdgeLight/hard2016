@@ -28,13 +28,15 @@ body {
 	float: left;
 }
 #tizai{
-	width: 41px;
-	height: 67px;
+	width: 63px;
+	height: 80px;
 	position: fixed;
 	top: 471px;
 	left: 166px;
-	border-style: solid; 
-	border-width: thick;
+}
+#tizai img{
+	width: 63px;
+	height: 80px;
 }
 .popover{          /* 白色半透明弹出框样式 */
 	width: 300px; 
