@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //---------------------前后端交互用变量---------------------------//
 var score = 0;                        //位置/分数
 var overtime = 1;                     //是否超时（0为超时）
@@ -202,6 +203,24 @@ var moving = false;
 var arrive = false;
 var answering;
 var e = 0;
+=======
+/*佛祖保佑，没有bug*/
+
+/*moveTo函数下有四个子函数：
+horizontal() 控制梯仔水平运动
+vertical()   控制梯仔垂直运动
+jump()       梯仔从南校跳到北校
+change()     改变梯仔gif
+每次到达答题点运行动画的回调函数answer()
+点击类名为startBtn的按钮前往下一个答题点*/
+
+var e = 1;
+
+var tizai = {
+	top:471,
+	left:166
+}
+>>>>>>> e4ecda0abbd6a2bf087028ada247c56f0b45ca2e
 
 /*moveTo函数下有四个子函数：
 horizontal() 控制梯仔水平运动
@@ -214,6 +233,7 @@ change()     改变梯仔gif
 var _tizai = $("#tizai");
 var _bg = $("#bg");
 var point = []; //每次运动目的地坐标（并不是答题点）
+<<<<<<< HEAD
 
 var tizai = {
 	top: 471,
@@ -228,6 +248,11 @@ var bg = {
 
 
 // type = 0则该点为答题点
+=======
+/*
+type = 0则该点为答题点
+*/
+>>>>>>> e4ecda0abbd6a2bf087028ada247c56f0b45ca2e
 point[0] = {
 	top: 471,
 	left: 166,
@@ -305,7 +330,11 @@ point[14] = {
 }
 point[15] = {
 	top: 1527,
+<<<<<<< HEAD
 	left: 1048,
+=======
+	left: 1038,
+>>>>>>> e4ecda0abbd6a2bf087028ada247c56f0b45ca2e
 	type: 1
 }
 point[16] = {
@@ -355,6 +384,7 @@ point[24] = {
 }
 
 
+<<<<<<< HEAD
 $(document).ready(function() {
 	$(".startBtn").click(function() {                                     //开始按钮点击后（传一次ajax）
 		$(".rule").hide();                                                  //关闭开始提示
@@ -369,6 +399,24 @@ $(document).ready(function() {
 });
 
 
+=======
+
+$(document).ready(function() {
+	$(".startBtn").click(function() {
+		moveTo(point[e].top, point[e].left, point[e].type);
+		$(".rule").hide();
+		setTimeout(function() {
+			$(".right").show();
+		}, 5000);
+	});
+	$(".nextBtn").click(function() {
+		e++;
+		moveTo(point[e].top, point[e].left, point[e].type);
+		$(".right").hide();
+	});
+});
+
+>>>>>>> e4ecda0abbd6a2bf087028ada247c56f0b45ca2e
 function moveTo(desT, desL, type) {
 	if (e == 8 || e == 11 || e == 15 || e == 20) {
 		vertical(desT,type);
@@ -392,7 +440,11 @@ function horizontal(desL,type) { //梯仔水平运动动画函数
 		left: -changeL
 	}, 5000,function(){
 		if(type == 0){
+<<<<<<< HEAD
 			answer_q();
+=======
+			answer();
+>>>>>>> e4ecda0abbd6a2bf087028ada247c56f0b45ca2e
 		}
 	});
 }
@@ -403,11 +455,16 @@ function vertical(desT,type) { //梯仔垂直运动动画函数
 		top: -changeT
 	}, 5000,function(){
 		if(type == 0){
+<<<<<<< HEAD
 			answer_q();
+=======
+			answer();
+>>>>>>> e4ecda0abbd6a2bf087028ada247c56f0b45ca2e
 		}
 	});
 }
 
+<<<<<<< HEAD
 
 function jump(desT, desL,type) { //梯仔跳跃动画函数
 	var changeT = desT - tizai.top;
@@ -468,3 +525,69 @@ function change(mode) { //改变梯仔gif的函数
 	}
 }
 
+=======
+function jump(desT, desL,type) { //梯仔跳跃动画函数
+	var changeT = desT - tizai.top;
+	var changeL = desL - tizai.left;
+	_bg.animate({
+		top: -changeT,
+		left: -changeL
+	}, 2000);
+	_tizai.animate({
+		top: '-=' + (point[5].top - point[4].top),
+		left: '-=' + (point[5].left - point[4].left)
+	}, 2000);
+	_tizai.animate({
+		top: 471,
+		left: 166
+	}, 3000,function(){
+		if(type == 0){
+			answer();
+		}
+	});
+}
+
+function change(mode) { //改变梯仔gif的函数
+	if (mode == 5) {
+		setTimeout(function(){
+		_tizai.html("<img src='./resource/three.gif'>");
+		},2000);
+		setTimeout(function() {
+			_tizai.html("<img src='./resource/two.gif'>");
+		}, 4800);
+		setTimeout(function() {
+			_tizai.html("<img src='./resource/one.gif'>");
+		}, 5500);
+	}
+	if (mode == 8) {
+		_tizai.html("<img src='./resource/four.gif'>");
+		setTimeout(function() {
+			_tizai.html("<img src='./resource/one.gif'>");
+		}, 5000);
+	}
+	if (mode == 11) {
+		_tizai.html("<img src='./resource/four.gif'>");
+		setTimeout(function() {
+			_tizai.html("<img src='./resource/five.gif'>");
+		}, 5000);
+	}
+	if (mode == 15) {
+		_tizai.html("<img src='./resource/four.gif'>");
+		setTimeout(function() {
+			_tizai.html("<img src='./resource/one.gif'>");
+		},5000);
+	}
+	if (mode == 20) {
+		_tizai.html("<img src='./resource/four.gif'>");
+		setTimeout(function() {
+			_tizai.html("<img src='./resource/five.gif'>");
+		},5000);
+	}
+}
+
+function answer(){
+	$(".right").show();
+	/*@海鑫
+	把你的函数放在这个地方*/
+}
+>>>>>>> e4ecda0abbd6a2bf087028ada247c56f0b45ca2e
