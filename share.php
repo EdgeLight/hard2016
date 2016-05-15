@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include("game.php");//获取score
 
 require "jssdk.php";
@@ -7,33 +7,34 @@ $signPackage = $jssdk->GetSignPackage();
 
 if($score['score'] >=0 && $score['score'] <= 4)
 {
-	$news = array("Title" =>"毕业之旅", 
+	$news = array("Title" =>"毕业之旅",
 	"Description"=>"本宝宝不服，竟然才华工幼儿园毕业？戳链接来毕业",
-	"PicUrl" =>'', //图片?
-	"Url" =>'');  //游戏入口地址?	
+	"PicUrl" =>'resourse/youeryuan.jpg', //图片?
+	"Url" =>'');  //游戏入口地址?
 }
 if($score['score'] >= 5 && $score['score'] <= 8)
 {
-	$news = array("Title" =>"", 
+	$news = array("Title" =>"",
 	"Description"=>"聪明才智的我才是个华工附小生？戳链接来毕业",
-	"PicUrl" =>'', //图片?
-	"Url" =>'');  //游戏入口地址?	
+	"PicUrl" =>'resourse/xiaoxue.jpg', //图片?
+	"Url" =>'');  //游戏入口地址?
 }
 if($score['score'] >= 9 && $score['score'] <= 10)
 {
-	$news = array("Title" =>"", 
+	$news = array("Title" =>"",
 	"Description"=>"学富五车的我还是嫩嫩的华工高中生！戳链接来毕业",
-	"PicUrl" =>'', //图片?
-	"Url" =>'');  //游戏入口地址?	
+	"PicUrl" =>'resourse/zhongxue.jpg', //图片?
+	"Url" =>'');  //游戏入口地址?
 }
 if($score['score'] >= 11 && $score['score'] <= 12)
 {
-	$news = array("Title" =>"", 
+	$news = array("Title" =>"",
 	"Description"=>"本宝宝可是名正言顺从华工毕业！戳链接来毕业",
-	"PicUrl" =>'', //图片?
-	"Url" =>'');  //游戏入口地址?	
-} 
+	"PicUrl" =>'resourse/daxue.jpg', //图片?
+	"Url" =>'');  //游戏入口地址?
+}
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +46,6 @@ if($score['score'] >= 11 && $score['score'] <= 12)
     <button class="btn btn_primary" id="onMenuShare">分享</button>
 </body>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"> </script>
-<script>
 	wx.config
 	({
 		debug: false,//调试选true
@@ -60,12 +60,13 @@ if($score['score'] >= 11 && $score['score'] <= 12)
 			'onMenuShareWeibo',
 		]
     });
-  
-	wx.ready(function () {
-	document.querySelector('#onMenuShare').onclick = function () {
-		alert("赶快点击右上角...按钮来分享吧！");
-	};		
-	//分享给朋友
+
+		wx.ready(function () {
+			document.querySelector('#onMenuShare').onclick = function () {
+				alert("赶快点击右上角...按钮来分享吧！");
+			};
+
+		//分享给朋友
     wx.onMenuShareAppMessage({
         title: '<?php echo $news['Title'];?>',
         desc: '<?php echo $news['Description'];?>',
@@ -85,7 +86,8 @@ if($score['score'] >= 11 && $score['score'] <= 12)
 		alert('分享失败。。。');
       }
     });
- 
+
+
 	//分享到朋友圈
     wx.onMenuShareTimeline({
       title: '<?php echo $news['Title'];?>',
@@ -129,7 +131,6 @@ if($score['score'] >= 11 && $score['score'] <= 12)
 		alert('分享失败。。。');
       }
     });
-  
   // “分享到微博”
     wx.onMenuShareWeibo({
       title: '<?php echo $news['Title'];?>',
@@ -152,10 +153,7 @@ if($score['score'] >= 11 && $score['score'] <= 12)
         //alert(JSON.stringify(res));
 		alert('分享失败。。。');
       }
-    }); 
-
 });
-
 //wx.error(function (res) {
 //  alert(res.errMsg);
 //});
