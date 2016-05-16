@@ -1,3 +1,4 @@
+
 //---------------------前后端交互用变量---------------------------//
 var score = 0;                        //位置/分数
 var overtime = 1;                     //是否超时（0为超时）
@@ -305,7 +306,7 @@ point[14] = {
 }
 point[15] = {
 	top: 1527,
-	left: 1048,
+	left: 1038,
 	type: 1
 }
 point[16] = {
@@ -368,7 +369,6 @@ $(document).ready(function() {
 	});
 });
 
-
 function moveTo(desT, desL, type) {
 	if (e == 8 || e == 11 || e == 15 || e == 20) {
 		vertical(desT,type);
@@ -407,7 +407,6 @@ function vertical(desT,type) { //梯仔垂直运动动画函数
 		}
 	});
 }
-
 
 function jump(desT, desL,type) { //梯仔跳跃动画函数
 	var changeT = desT - tizai.top;
