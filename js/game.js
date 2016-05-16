@@ -7,9 +7,20 @@ var status = 'start';                 //状态码
 var timedown = 29;                    //倒计时显示时间(比总时间少1)
 var isanswer = false;                 //点击确定按钮提交后锁定计时器
 var td;                               //声明倒计时器
-var area = 'north';                        //南北校
+var area = 'north';                   //南北校
+var news = [];                        //分享用
 //--------------------------------------------------------------//
-var area = window.location.href.split('status=')[1];           //获取南北校标志
+area = window.location.href.split('location=')[1];               //获取南北校标志
+//设置分享默认
+news['Title'] = '毕业之旅';
+news['Description'] = '本宝宝不服，竟然才华工幼儿园毕业？戳链接来毕业';
+if (area == 'north') {
+	news['Url'] = 'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=north';
+}else {
+	news['Url'] = 'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=south';
+}
+news['PicUrl'] = 'resourse/youeryuan.jpg';
+
 //-------------------------------------------------------------//
 //     变量            前端             后台              处理
 //  题目内容          question                        JSON题号，前端从question取得
@@ -42,6 +53,7 @@ function ajax_start(){
 				  status  = jsondata.step;    //start表示游戏开始，over表示游戏结束，move表示继续前进，stay表示停留在原答题点再答一次
 			 		q_num   = jsondata.question;//题目号(下一次的题号！！)
 			 		score   = jsondata.score;//最终成绩，也是当前题目数
+					news    = jsondata.news;//分享用数组
 			    ajax_over();   //ajax返回后的函数（纯前端）
 				},
 	    error:function(){
@@ -179,17 +191,17 @@ $("#again_btn").on("click",function(){
 })
 //显示成就页面
 function achievement_show() {
-  if (score <= 4) {
+  if (score <= 5) {
 		console.log('幼儿园');
      $(".title").html('残念 只答对' + score + '题');
 		 $("#youeryuan").show();
-  }else if (score >= 5 && score <= 8) {
+  }else if (score >= 6 && score <= 9) {
 		$(".title").html('哈哈 答对了' + score + '题');
 		$("#xiaoxue").show();
-  }else if (score >= 9 && score <= 10) {
+  }else if (score >= 10 && score <= 12) {
 		$(".title").html('真棒！答对' + score + '题');
 		$("#zhongxue").show();
-  }else if (score >= 11) {
+  }else if (score >= 13) {
 		$("#daxue").show();
   }
 }
@@ -204,7 +216,7 @@ var H = document.body.clientHeight;
 var moving = false;
 var arrive = false;
 var answering;
-var e = 0;
+var e = 1;
 
 /*moveTo函数下有四个子函数：
 horizontal() 控制梯仔水平运动
@@ -222,7 +234,8 @@ var tizai = {
 	top: 471,
 	left: 166,
 	width: 41,
-	height: 67
+	height: 67,
+	speed : 0.06
 }
 var bg = {
 	top: 0,
@@ -332,18 +345,18 @@ point[19] = {
 	type: 1
 }
 point[20] = {
+	top: 1700,
+	left: 2748,
+	type: 0
+}
+point[21] = {
 	top: 2000,
 	left: 2748,
 	type: 1
 }
-point[21] = {
-	top: 2000,
-	left: 2375,
-	type: 0
-}
 point[22] = {
 	top: 2000,
-	left: 2000,
+	left: 2200,
 	type: 0
 }
 point[23] = {
@@ -371,7 +384,7 @@ $(document).ready(function() {
 });
 
 function moveTo(desT, desL, type) {
-	if (e == 8 || e == 11 || e == 15 || e == 20) {
+	if (e == 8 || e == 11 || e == 15 || e == 20 || e == 21) {
 		var distance = (point[e].top - point[e-1].top) > 0 ? (point[e].top - point[e-1].top) : (point[e-1].top - point[e].top);
 		var time = Math.floor(distance/tizai.speed);
 		vertical(desT,type,time);
@@ -469,7 +482,7 @@ function change(mode) { //改变梯仔gif的函数
 	if (mode == 19) {
 		_tizai.html("<img src='./resource/four.gif'>");
 	}
-	if(mode == 20){
+	if(mode == 21){
 		_tizai.html("<img src='./resource/five.gif'>");
 	}
 }

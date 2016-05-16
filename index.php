@@ -7,7 +7,9 @@ if (strpos(addslashes($_SERVER['HTTP_USER_AGENT']), 'MicroMessenger') != false) 
 } else {
   // $this->error('请从微信端登录');
 }
-
+require "jssdk.php";
+$jssdk = new JSSDK("wxd25012bb1da2b4cf", "d4624c36b6795d1d99dcf0547af5443d");//appid 与 appesecret?
+$signPackage = $jssdk->GetSignPackage();
 ?>
 <!DOCTYPE html>
 
@@ -178,6 +180,77 @@ if (strpos(addslashes($_SERVER['HTTP_USER_AGENT']), 'MicroMessenger') != false) 
 	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="js/question.js"></script>
 	<script type="text/javascript" src="js/game.js"></script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"> </script>
+	<script>
+	wx.config
+	({
+		debug: false,//调试选true
+		appId: '<?php echo $signPackage["appId"];?>',
+		timestamp: '<?php echo $signPackage["timestamp"];?>',
+		nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+		signature: '<?php echo $signPackage["signature"];?>',
+		jsApiList:[
+			'onMenuShareTimeline',
+			'onMenuShareAppMessage',
+			'onMenuShareQQ',
+			'onMenuShareWeibo',
+		]
+    });
+
+		wx.ready(function () {
+			document.querySelector('#onMenuShare').onclick = function () {
+				alert("赶快点击右上角...按钮来分享吧！");
+			}
+		});
+
+
+		//分享给朋友
+    wx.onMenuShareAppMessage({
+        title: news['Title'],
+        desc: news['Description'],
+        link: news['Url'],
+        imgUrl: news['PicUrl'],
+      trigger: function (res) {
+        //alert('用户点击发送给朋友');
+      },
+      success: function (res) {
+        //alert('已分享');
+      },
+      cancel: function (res) {
+        //alert('已取消');
+      },
+      fail: function (res) {
+        //alert(JSON.stringify(res));
+		    alert('分享失败。。。');
+      }
+    });
+
+
+	//分享到朋友圈
+    wx.onMenuShareTimeline({
+      title: news['Title'],
+      link: news['Url'],
+      imgUrl: news['PicUrl'],
+      trigger: function (res) {
+        //alert('用户点击分享到朋友圈');
+      },
+      success: function (res) {
+        //alert('已分享');
+      },
+      cancel: function (res) {
+        //alert('已取消');
+      },
+      fail: function (res) {
+        //alert(JSON.stringify(res));
+		    alert('分享失败。。。');
+      }
+    });
+
+	//wx.error(function (res) {
+	//  alert(res.errMsg);
+	//});
+</script>
+<script src="http://demo.open.weixin.qq.com/jssdk/js/api-6.1.js?ts=1420774989"> </script>
 
 
 </body>
