@@ -1,4 +1,3 @@
-
 //---------------------前后端交互用变量---------------------------//
 var score = 0;                        //位置/分数
 var overtime = 1;                     //是否超时（0为超时）
@@ -10,7 +9,7 @@ var isanswer = false;                 //点击确定按钮提交后锁定计时�
 var td;                               //声明倒计时器
 var area = 'north';                        //南北校
 //--------------------------------------------------------------//
-//var area = windows.location.href.split('status=')[1];           //获取南北校标志
+var area = window.location.href.split('status=')[1];           //获取南北校标志
 //-------------------------------------------------------------//
 //     变量            前端             后台              处理
 //  题目内容          question                        JSON题号，前端从question取得
@@ -143,22 +142,25 @@ function timedown_start() {
 }
 //答题开始(已经在答题点)
 function answer_q(){
-	initialize_all();                                        //初始化
-  input_ques();                                            //根据从后台取得的题号q_num出题
 	$("#qabox").show();                                      //显示问答框架
-	timedown_start();                                       //倒计时开始
+	timedown_start();                                        //倒计时开始
 }
 //ajax返回后执行的函数
 function ajax_over() {
+	initialize_all();                                        //初始化
 	if (status == 'over') {                                  //游戏结束
-      achievement_show();                                    //显示成就页面
+      achievement_show();                                  //显示成就页面
 	}else {
-		input_ques();                                          //出题
+		  input_ques();                                        //出题（包括第一题）
 	}
-
 	if (status != 'start' && status != 'over') {             //并非第一题,并且游戏继续的情况下
     check_answer();                                        //判断对错
   }
+	if (status == 'start') {                                 //第一题情况下，延迟作答
+		setTimeout(function() {
+	    answer_q();
+		},100)
+	}
 }
 //初始化函数
 function initialize_all() {
@@ -360,7 +362,6 @@ $(document).ready(function() {
 	$(".startBtn").click(function() {                                     //开始按钮点击后（传一次ajax）
 		$(".rule").hide();                                                  //关闭开始提示
 		ajax_start();                                                       //通过AJAX取得题号
-		answer_q();                                                         //出第一题
 	});
 	$(".nextBtn").click(function() {                                      //继续按钮
 		$(".result").hide();

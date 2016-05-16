@@ -1,4 +1,5 @@
 ﻿<?php
+header("Content-Type: text/html; charset=UTF-8");
 include("game.php");//获取score
 
 require "jssdk.php";

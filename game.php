@@ -1,5 +1,5 @@
 ﻿<?php
-// header("Content-Type:application/json;charset=utf-8");
+header("Content-Type:application/json;charset=utf-8");
 session_start();
 include("answer.php");
 $db = new PDO("mysql:host=localhost;dbname=hard2016","wechat","wechat@)!#",array(PDO::ATTR_PERSISTENT => true));

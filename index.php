@@ -1,5 +1,5 @@
-
 <?php
+header("Content-Type: text/html; charset=UTF-8");
 session_start();
 if (strpos(addslashes($_SERVER['HTTP_USER_AGENT']), 'MicroMessenger') != false) {
 	$_SESSION['wechat_id'] = $_GET['wechatId'];
@@ -78,34 +78,34 @@ if (strpos(addslashes($_SERVER['HTTP_USER_AGENT']), 'MicroMessenger') != false) 
 	<div class="qes_and_ans popover" id="qabox">
 		<!-- 题目 -->
 		<div class="question">
-			<p id="question">学校里有那么多单杠，是因为</p>
+			<p id="question"></p>
 		</div>
 		    <!-- 选项A -->
 				<div class="choose" id="choose_a">
 					<div class="dot" id="dot_a"></div>
 					<div class="answer">
-						<p id="selection_a">让同学们强身健体,以便女生当男生用，男生当畜生用</p>
+						<p id="selection_a"></p>
 					</div>
 				</div>
 				<!-- 选项B -->
 				<div class="choose" id="choose_b">
 					<div class="dot" id="dot_b"></div>
 					<div class="answer">
-						<p id="selection_b">装饰校园<p/>
+						<p id="selection_b"><p/>
 					</div>
 				</div>
 				<!-- 选项C -->
 				<div class="choose" id="choose_c">
 					<div class="dot" id="dot_c"></div>
 					<div class="answer">
-						<p id="selection_c">男生体测要测引体向上<p/>
+						<p id="selection_c"><p/>
 					</div>
 				</div>
 				<!-- 选项D -->
 				<div class="choose" id="choose_d">
 					<div class="dot" id="dot_d"></div>
 					<div class="answer">
-						<p id="selection_d">男生要加强锻炼才能抱得起女朋友<p/>
+						<p id="selection_d"><p/>
 					</div>
 				</div>
 				<!-- 倒计时 -->
