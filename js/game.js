@@ -372,42 +372,48 @@ $(document).ready(function() {
 
 function moveTo(desT, desL, type) {
 	if (e == 8 || e == 11 || e == 15 || e == 20) {
-		vertical(desT,type);
+		var distance = (point[e].top - point[e-1].top) > 0 ? (point[e].top - point[e-1].top) : (point[e-1].top - point[e].top);
+		var time = Math.floor(distance/tizai.speed);
+		vertical(desT,type,time);
 	} else if (e == 5) {
 		jump(desT, desL,type);
 	} else {
-		horizontal(desL,type);
+		var distance = (point[e].left - point[e-1].left) > 0 ? (point[e].left - point[e-1].left) : (point[e-1].left - point[e].left);
+		var time = Math.floor(distance/tizai.speed);
+		horizontal(desL,type,time);
 	}
-	change(e);
 	setTimeout(function() {
 		if (type == 1) {
 			e++;
 			moveTo(point[e].top, point[e].left, point[e].type);
 		}
-	}, 5050);
+	}, time+50);
 }
 
-function horizontal(desL,type) { //梯仔水平运动动画函数
+function horizontal(desL,type,time) { //梯仔水平运动动画函数
 	var changeL = desL - tizai.left;
 	_bg.animate({
 		left: -changeL
-	}, 5000,function(){
+	}, time,function(){
+		change(e);
 		if(type == 0){
 			answer_q();
 		}
 	});
 }
 
-function vertical(desT,type) { //梯仔垂直运动动画函数
+function vertical(desT,type,time) { //梯仔垂直运动动画函数
 	var changeT = desT - tizai.top;
 	_bg.animate({
 		top: -changeT
-	}, 5000,function(){
+	}, time,function(){
+		change(e);
 		if(type == 0){
 			answer_q();
 		}
 	});
 }
+
 
 function jump(desT, desL,type) { //梯仔跳跃动画函数
 	var changeT = desT - tizai.top;
@@ -415,15 +421,20 @@ function jump(desT, desL,type) { //梯仔跳跃动画函数
 	_bg.animate({
 		top: -changeT,
 		left: -changeL
-	}, 2000);
+	}, 1000);
 	_tizai.animate({
 		top: '-=' + (point[5].top - point[4].top),
 		left: '-=' + (point[5].left - point[4].left)
-	}, 2000);
+	}, 1000,function(){
+		setTimeout(function(){
+			_tizai.html("<img src='./resource/three.gif'>");
+		},200);
+	});
 	_tizai.animate({
 		top: 471,
 		left: 166
-	}, 3000,function(){
+	}, 2000,function(){
+		change(e);
 		if(type == 0){
 			answer_q();
 		}
@@ -431,39 +442,34 @@ function jump(desT, desL,type) { //梯仔跳跃动画函数
 }
 
 function change(mode) { //改变梯仔gif的函数
-	if (mode == 5) {
-		setTimeout(function(){
-		_tizai.html("<img src='./resource/three.gif'>");
-		},2000);
-		setTimeout(function() {
+	if (mode == 5) {                                         //jump更换
 			_tizai.html("<img src='./resource/two.gif'>");
-		}, 4800);
 		setTimeout(function() {
 			_tizai.html("<img src='./resource/one.gif'>");
-		}, 5500);
+		}, 800);
 	}
-	if (mode == 8) {
+	if (mode == 7) {
 		_tizai.html("<img src='./resource/four.gif'>");
-		setTimeout(function() {
-			_tizai.html("<img src='./resource/one.gif'>");
-		}, 5000);
 	}
-	if (mode == 11) {
-		_tizai.html("<img src='./resource/four.gif'>");
-		setTimeout(function() {
-			_tizai.html("<img src='./resource/five.gif'>");
-		}, 5000);
+	if(mode == 8) {
+		_tizai.html("<img src='./resource/one.gif'>");
 	}
-	if (mode == 15) {
+	if (mode == 10) {
 		_tizai.html("<img src='./resource/four.gif'>");
-		setTimeout(function() {
-			_tizai.html("<img src='./resource/one.gif'>");
-		},5000);
 	}
-	if (mode == 20) {
+	if(mode == 11){
+		_tizai.html("<img src='./resource/five.gif'>");
+	}
+	if (mode == 14) {
 		_tizai.html("<img src='./resource/four.gif'>");
-		setTimeout(function() {
-			_tizai.html("<img src='./resource/five.gif'>");
-		},5000);
+	}
+	if(mode == 15){
+		_tizai.html("<img src='./resource/one.gif'>");
+	}
+	if (mode == 19) {
+		_tizai.html("<img src='./resource/four.gif'>");
+	}
+	if(mode == 20){
+		_tizai.html("<img src='./resource/five.gif'>");
 	}
 }

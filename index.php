@@ -14,7 +14,7 @@ if (strpos(addslashes($_SERVER['HTTP_USER_AGENT']), 'MicroMessenger') != false) 
 <html>
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<link rel="stylesheet" type="text/css" href="style/style.css">
 	<title>毕业之旅</title>
 </head>
@@ -108,6 +108,8 @@ if (strpos(addslashes($_SERVER['HTTP_USER_AGENT']), 'MicroMessenger') != false) 
 						<p id="selection_d"><p/>
 					</div>
 				</div>
+				<!-- 计时器和按钮占位框 -->
+				<div class="replace"></div>
 				<!-- 倒计时 -->
 				<div class="count" id="timedown">30s</div>
 				<div class="button" id="sub"><p>确定</p></div>

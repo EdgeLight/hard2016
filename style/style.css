@@ -2,6 +2,14 @@
 	font-family: myFont;
 	src: url('../resource/方正正纤黑简体.ttf');
 }
+@media screen and (max-height: 550px) {
+	body{
+		-webkit-transform: scale(0.86);
+		-ms-transform: scale(0.86);
+		-o-transform: scale(0.86);
+		transform: scale(0.86);
+	}
+}
 html,body{
 	width:100%;
 	height:100%;
@@ -15,6 +23,22 @@ body {
  * {
 	margin: 0;
 	padding: 0;
+}
+.div{
+	-webkit-transform: translate3d(0,0,0);
+	-ms-transform: translate3d(0,0,0);
+	-o-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-ms-backface-visibility: hidden;
+	backface-visibility: hidden;
+
+	-webkit-perspective: 1000;
+	-moz-perspective: 1000;
+	-ms-perspective: 1000;
+	perspective: 1000;
 }
 #bg{       /* 背景地图 */
 	position: fixed;
@@ -41,16 +65,17 @@ body {
 }
 .popover{          /* 白色半透明弹出框样式 */
 	width: 300px;
-	height: 410px;
+	min-height: 410px;
 	background-color: rgba(255,255,255,0.85);
 	position: fixed;
-	top: 45px;
+	top: 35px;
 	margin:0 auto;
 	left: 0;
 	right: 0;
 	border-radius: 20px;
 	display: none;
 	color: #1d8162;
+	overflow: hidden;
 }
 .text{        /* 游戏规则 成就文本 */
 	width: 88%;
@@ -81,19 +106,19 @@ body {
 	line-height: 50px;
 	margin-top: 85px;
 }
-.question{
+.question{    /* 问题 */
 	font-size: 25px;
 	width: 86%;
 	margin: 0 auto;
 	margin-top: 25px;
 	margin-bottom: 15px;
 }
-.choose{
+.choose{       /* 选项 */
 	width: 86%;
 	margin: 0 auto;
 	overflow: hidden;
 }
-.answer{
+.answer{      /* 选项文本 */
 	width: 88%;
 	text-align: left;
 	font-size: 20px;
@@ -108,7 +133,9 @@ body {
 	margin:0 auto;
 	left: 0;
 	right: 0;
-	bottom: 100px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	bottom: 75px;
 	text-align: center;
 }
 .button{         /* 正下方按钮样式 */
@@ -119,7 +146,8 @@ body {
 	margin:0 auto;
 	left: 0;
 	right: 0;
-	bottom: 25px;
+	margin-bottom: 25px;
+	bottom: 0;
 	border-radius: 50px;
 	line-height: 50px;
 	overflow: hidden;
@@ -127,6 +155,10 @@ body {
 	text-align: center;
 	color: white;
 	font-size: 25px;
+}
+.replace{		/* 计时器和按钮占位框样式 */
+	width: 100%;
+	height: 115px;
 }
 .dot{         /* 提示选中的圆点 */
 	width: 15px;
@@ -160,7 +192,7 @@ body {
 	right: 0;
 	bottom: -63px;
 }
-.rule{
+.rule{       /* 有修改 */
 	display: block;
 }
 
