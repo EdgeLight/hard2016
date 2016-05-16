@@ -99,7 +99,7 @@ if($answer == 'start')
 		$rs -> execute();
 		$q_num = $rs->fetch();
 		$q_num = $q_num['q_num'];
-		
+
 		if($location == 'n')
 		{
 			if($answer == $answer_n[$q_num])
@@ -120,9 +120,9 @@ if($answer == 'start')
 				$isright = 0;
 			}
 		}
-		
+
 		$overtime = $_POST['overtime'];
-		
+
 		if(($overtime == 0) || ($isright == 0))	//超时或答错，前端传来超时信息与用户所选答案
 		{
 			if($chance['chance'] == 0)
@@ -133,78 +133,78 @@ if($answer == 'start')
 					{
 						$news = array("Title" =>"毕业之旅",
 						"Description"=>"本宝宝不服，竟然才华工幼儿园毕业？戳链接来毕业",
-						"PicUrl" =>'resourse/youeryuan.jpg',
-						"Url" =>'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=north'); 
+						"PicUrl" =>'resourse/youeryuan.png',
+						"Url" =>'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=north');
 					}
 					if($score['score'] >= 6 && $score['score'] <= 9)
 					{
 						$news = array("Title" =>"毕业之旅",
 						"Description"=>"聪明才智的我才是个华工附小生？戳链接来毕业",
-						"PicUrl" =>'resourse/xiaoxue.jpg', 
-						"Url" =>'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=north'); 
+						"PicUrl" =>'resourse/xiaoxue.png', 
+						"Url" =>'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=north');
 					}
 					if($score['score'] >= 10 && $score['score'] <= 12)
 					{
 						$news = array("Title" =>"毕业之旅",
 						"Description"=>"学富五车的我还是嫩嫩的华工高中生！戳链接来毕业",
-						"PicUrl" =>'resourse/zhongxue.jpg', 
-						"Url" =>'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=north'); 
+						"PicUrl" =>'resourse/zhongxue.png', 
+						"Url" =>'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=north');
 					}
 					if($score['score'] >= 13 && $score['score'] <= 16)
 					{
 						$news = array("Title" =>"毕业之旅",
 						"Description"=>"本宝宝可是名正言顺从华工毕业！戳链接来毕业",
-						"PicUrl" =>'resourse/daxue.jpg', 
-						"Url" =>'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=north'); 
+						"PicUrl" =>'resourse/daxue.png', 
+						"Url" =>'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=north');
 					}
-					
+
 				}else
 				{
 					if($score['score'] >=0 && $score['score'] <= 5)
 					{
 						$news = array("Title" =>"毕业之旅",
 						"Description"=>"本宝宝不服，竟然才华工幼儿园毕业？戳链接来毕业",
-						"PicUrl" =>'resourse/youeryuan.jpg',
-						"Url" =>'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=south'); 
+						"PicUrl" =>'resourse/youeryuan.png',
+						"Url" =>'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=south');
 					}
 					if($score['score'] >= 6 && $score['score'] <= 9)
 					{
 						$news = array("Title" =>"毕业之旅",
 						"Description"=>"聪明才智的我才是个华工附小生？戳链接来毕业",
-						"PicUrl" =>'resourse/xiaoxue.jpg', 
-						"Url" =>'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=south');  
+						"PicUrl" =>'resourse/xiaoxue.png', 
+						"Url" =>'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=south');
 					}
 					if($score['score'] >= 10 && $score['score'] <= 12)
 					{
 						$news = array("Title" =>"毕业之旅",
 						"Description"=>"学富五车的我还是嫩嫩的华工高中生！戳链接来毕业",
-						"PicUrl" =>'resourse/zhongxue.jpg', 
-						"Url" =>'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=south');  
+						"PicUrl" =>'resourse/zhongxue.png', 
+						"Url" =>'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=south');
 					}
 					if($score['score'] >= 13 && $score['score'] <= 16)
 					{
 						$news = array("Title" =>"毕业之旅",
 						"Description"=>"本宝宝可是名正言顺从华工毕业！戳链接来毕业",
-						"PicUrl" =>'resourse/daxue.jpg', 
-						"Url" =>'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=south'); 
+						"PicUrl" =>'resourse/daxue.png', 
+						"Url" =>'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=south');
 					}
 				}
-				
+
 				$game['news'] = $news;
-				
+
 				$game['step'] = "over";	//游戏结束状态码
 
 				$game['score'] = $score['score'];	//最终成绩传给前端
 
 				$json = json_encode($game);
-				echo $json;							
-				
+				echo $json;
+
 				$rs = $db -> prepare("delete from step where wechat_id = ?");
 				$rs -> setFetchMode(PDO::FETCH_ASSOC);
 				$db -> setAttribute(PDO::ATTR_CASE,PDO::CASE_NATURAL);
 				$rs -> bindParam(1,$wechat_id);
 				$rs -> execute();
-				
+
 			}else
 			{
 				$db -> beginTransaction();
@@ -214,8 +214,8 @@ if($answer == 'start')
 				}catch(Exception $e)
 				{
 					$db -> rollBack();
-				}	
-				
+				}
+
 				if($location == 'n')
 				{
 					$q_num = rand(0,84);
@@ -224,7 +224,7 @@ if($answer == 'start')
 				{
 					$q_num = rand(0,136);
 				}
-				
+
 				$db -> beginTransaction();
 				try{
 					$exec_update = $db -> exec("update step set q_num = '$q_num' where wechat_id = '$wechat_id'");
@@ -232,14 +232,14 @@ if($answer == 'start')
 				}catch(Exception $e)
 				{
 					$db -> rollBack();
-				}	
-				
+				}
+
 				$game['question'] = $q_num;	//题号传给前端
 
 				$game['step'] = "stay";	//停留在原答题点再答另一题状态码
 				$json = json_encode($game);
-				echo $json;	
-			}						
+				echo $json;
+			}
 		}else
 		{
 			$db -> beginTransaction();
@@ -250,7 +250,7 @@ if($answer == 'start')
 			{
 				$db -> rollBack();
 			}
-			
+
 			if($location == 'n')
 			{
 				$q_num = rand(0,84);
@@ -259,7 +259,7 @@ if($answer == 'start')
 			{
 				$q_num = rand(0,136);
 			}
-			
+
 			$db -> beginTransaction();
 			try{
 				$exec_update = $db -> exec("update step set q_num = '$q_num' where wechat_id = '$wechat_id'");
@@ -267,15 +267,15 @@ if($answer == 'start')
 			}catch(Exception $e)
 			{
 				$db -> rollBack();
-			}	
-			
+			}
+
 			$game['question'] = $q_num;	//题号传给前端
-			
+
 			$game['step'] = "move";	//继续前进状态码
 			$json = json_encode($game);
 			echo $json;
 
-		}		
+		}
 	}
 }
 ?>
