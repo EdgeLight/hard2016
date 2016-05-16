@@ -3,13 +3,13 @@ var score = 0;                        //位置/分数
 var overtime = 1;                     //是否超时（0为超时）
 var answer = 'start';                 //选择的答案,值为'start'时为开始
 var q_num = 0;                        //题号
-var status = 'start';                      //状态码
+var status = 'start';                 //状态码
 var timedown = 29;                    //倒计时显示时间(比总时间少1)
 var isanswer = false;                 //点击确定按钮提交后锁定计时器
 var td;                               //声明倒计时器
-var area = '';                        //南北校
+var area = 'north';                        //南北校
 //--------------------------------------------------------------//
-
+//var area = windows.location.href.split('status=')[1];           //获取南北校标志
 //-------------------------------------------------------------//
 //     变量            前端             后台              处理
 //  题目内容          question                        JSON题号，前端从question取得
@@ -25,6 +25,7 @@ var area = '';                        //南北校
 // 题号               question       game['question']    JSON
 // 状态码             status         game['step']        JSON
 //------------------------------------------------------------//
+
 
 // 与后台交互
 function ajax_start(){
@@ -50,11 +51,22 @@ function ajax_start(){
 }
 //出题
 function input_ques(){
-	$("#question").html(question[q_num]);
-	$("#selection_a").html(selection_a[q_num]);
-	$("#selection_b").html(selection_b[q_num]);
-	$("#selection_c").html(selection_c[q_num]);
-	$("#selection_d").html(selection_d[q_num]);
+	//南校题库
+	if (area == 'south') {
+		$("#question").html(question_s[q_num]);
+		$("#selection_a").html(a_s[q_num]);
+		$("#selection_b").html(b_s[q_num]);
+		$("#selection_c").html(c_s[q_num]);
+		$("#selection_d").html(d_s[q_num]);
+	//北校题库
+	}else {
+		$("#question").html(question_n[q_num]);
+		$("#selection_a").html(a_n[q_num]);
+		$("#selection_b").html(b_n[q_num]);
+		$("#selection_c").html(c_n[q_num]);
+		$("#selection_d").html(d_n[q_num]);
+	}
+
 }
 //注册确定按钮
 $("#sub").on("click",function() {
@@ -62,6 +74,7 @@ $("#sub").on("click",function() {
     isanswer == true;
     $("#qabox").hide();
 		clearInterval(td);                                       //清除计时器
+		overtime = 1;
     setTimeout(function() {                                  //防止AJAX传得过快导致同一题发送了两次
       ajax_start();                                          //有选项被选择时，单击确定按钮提交答案(AJAX)
     },200)
@@ -114,7 +127,6 @@ function timedown_start() {
 			if (isanswer == false && answer == '') {           //并未提交或超时时（没有选择选项）
 				overtime = 0;                                    //设置为超时
         isanswer = true;
-				console.log('超时已发送');
 				$("#qabox").hide();                              //隐藏答题框
 				clearInterval(td);                               //清除计时器
 				ajax_start();
@@ -124,7 +136,6 @@ function timedown_start() {
 				$("#qabox").hide();                              //隐藏答题框
 				clearInterval(td);                               //清除计时器
 				ajax_start();                                    //提交为当前选中的答案
-				console.log('不超时，已发送');
 			}
 		}
 	},1000)
@@ -138,14 +149,15 @@ function answer_q(){
 }
 //ajax返回后执行的函数
 function ajax_over() {
-	if (status != 'start') {                                 //并非第一题的情况下
-    check_answer();                                        //判断对错
-  }
 	if (status == 'over') {                                  //游戏结束
-    achievement_show();                                    //显示成就页面
+      achievement_show();                                    //显示成就页面
 	}else {
 		input_ques();                                          //出题
 	}
+
+	if (status != 'start' && status != 'over') {             //并非第一题,并且游戏继续的情况下
+    check_answer();                                        //判断对错
+  }
 }
 //初始化函数
 function initialize_all() {
