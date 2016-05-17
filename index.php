@@ -62,7 +62,7 @@ $signPackage = $jssdk->GetSignPackage();
 	<div id="tizai">
 		<img src="resource/one.gif">
 	</div>
-	<!-- 开始 游戏规则页面 -->
+  <!-- 开始 游戏规则页面 -->
 	<div class="rule popover">
 		<div class="text">
 			<p class="_title">游戏规则</p>
@@ -72,8 +72,14 @@ $signPackage = $jssdk->GetSignPackage();
 				我没有好好珍惜<br>
 				如果能重来<br>
 				我会选择<br>
-				从华工毕业！！
+				从华工毕业！！<br>
+				(提示：游戏共有16个关卡，<br>
+				而毕业路上的你只有三次<br>
+				答题机会，每题只有30秒<br>
+				思考时间沿途欣赏美景的<br>
+				时候别忘了认真思考哦！)<br>
 			</p>
+			<div class="btn-replace"></div>
 		</div>
 		<!-- 开始按钮 -->
 		<div class="button startBtn" data-name="游戏开始"><p>游戏开始</p></div>
