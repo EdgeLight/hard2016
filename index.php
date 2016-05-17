@@ -254,7 +254,6 @@ $signPackage = $jssdk->GetSignPackage();
 	//});
 </script>
 
-<script src="http://demo.open.weixin.qq.com/jssdk/js/api-6.1.js?ts=1420774989"></script>
 
 </body>
 

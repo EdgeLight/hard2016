@@ -158,5 +158,4 @@ if($score['score'] >= 11 && $score['score'] <= 12)
 //  alert(res.errMsg);
 //});
 </script>
-<script src="http://demo.open.weixin.qq.com/jssdk/js/api-6.1.js?ts=1420774989"> </script>
 </html>
