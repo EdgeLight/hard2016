@@ -2,13 +2,14 @@
 header("Content-Type: text/html; charset=UTF-8");
 session_start();
 if (strpos(addslashes($_SERVER['HTTP_USER_AGENT']), 'MicroMessenger') != false) {
-	$_SESSION['wechat_id'] = $_GET['wechatId'];
-	$_SESSION['location'] = $_GET['location'];
+    $_SESSION['wechat_id'] = $_GET['wechatId'];
+    $_SESSION['location'] = $_GET['location'];
 } else {
-  // $this->error('请从微信端登录');
+    // $this->error('请从微信端登录');
 }
 require "jssdk.php";
-$jssdk = new JSSDK("wxd25012bb1da2b4cf", "d4624c36b6795d1d99dcf0547af5443d");//appid 与 appesecret?
+$jssdk = new JSSDK("wx72dcc0c8ae1265f9", "ec008dac2e11c2b893366ca77bb7b4d0");
+// $jssdk = new JSSDK("wxd25012bb1da2b4cf", "d4624c36b6795d1d99dcf0547af5443d");
 $signPackage = $jssdk->GetSignPackage();
 ?>
 <!DOCTYPE html>
@@ -184,11 +185,11 @@ $signPackage = $jssdk->GetSignPackage();
 	<script>
 	wx.config
 	({
-		debug: false,//调试选true
-		appId: '<?php echo $signPackage["appId"];?>',
-		timestamp: '<?php echo $signPackage["timestamp"];?>',
-		nonceStr: '<?php echo $signPackage["nonceStr"];?>',
-		signature: '<?php echo $signPackage["signature"];?>',
+		debug: true,//调试选true
+		appId: '<?php echo $signPackage["appId"]; ?>',
+		timestamp: '<?php echo $signPackage["timestamp"]; ?>',
+		nonceStr: '<?php echo $signPackage["nonceStr"]; ?>',
+		signature: '<?php echo $signPackage["signature"]; ?>',
 		jsApiList:[
 			'onMenuShareTimeline',
 			'onMenuShareAppMessage',
