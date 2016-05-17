@@ -76,7 +76,8 @@ function ajax_start(){
 					update_share();//每次请求后更新分享内容
 			    ajax_over();   //ajax返回后的函数（纯前端）
 				},
-	    error:function(){
+	    error:function(a,b,c){
+			console.log(a,b,c);
 	    	alert('发生错误！');
 	    }
 	  })
