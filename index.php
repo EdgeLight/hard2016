@@ -191,7 +191,7 @@ $signPackage = $jssdk->GetSignPackage();
 	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"> </script>
 	<script>
 	wx.config({
-		debug:false,//调试选true
+		debug:true,//调试选true
 		appId: '<?php echo $signPackage["appId"]; ?>',
 		timestamp: '<?php echo $signPackage["timestamp"]; ?>',
 		nonceStr: '<?php echo $signPackage["nonceStr"]; ?>',
@@ -253,6 +253,7 @@ $signPackage = $jssdk->GetSignPackage();
 	//  alert(res.errMsg);
 	//});
 </script>
+
 <script src="http://demo.open.weixin.qq.com/jssdk/js/api-6.1.js?ts=1420774989"></script>
 
 </body>
