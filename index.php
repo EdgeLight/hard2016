@@ -190,8 +190,7 @@ $signPackage = $jssdk->GetSignPackage();
 	<script type="text/javascript" src="js/game.js"></script>
 	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"> </script>
 	<script>
-	wx.config
-	({
+	wx.config({
 		debug:false,//调试选true
 		appId: '<?php echo $signPackage["appId"]; ?>',
 		timestamp: '<?php echo $signPackage["timestamp"]; ?>',
@@ -204,50 +203,51 @@ $signPackage = $jssdk->GetSignPackage();
     });
 
 		wx.ready(function () {
+				//分享给朋友
+			wx.onMenuShareAppMessage({
+				title: news['Title'],
+				desc: news['Description'],
+				link: news['Url'],
+				imgUrl: news['PicUrl'],
+			trigger: function (res) {
+				//alert('用户点击发送给朋友');
+			},
+			success: function (res) {
+				//alert('已分享');
+			},
+			cancel: function (res) {
+				//alert('已取消');
+			},
+			fail: function (res) {
+				//alert(JSON.stringify(res));
+					alert('分享失败。。。');
+			}
+			});
+
+
+			//分享到朋友圈
+			wx.onMenuShareTimeline({
+			title: news['Title'],
+			link: news['Url'],
+			imgUrl: news['PicUrl'],
+			trigger: function (res) {
+				//alert('用户点击分享到朋友圈');
+			},
+			success: function (res) {
+				//alert('已分享');
+			},
+			cancel: function (res) {
+				//alert('已取消');
+			},
+			fail: function (res) {
+				//alert(JSON.stringify(res));
+					alert('分享失败。。。');
+			}
+			});
 		});
 
 
-		//分享给朋友
-    wx.onMenuShareAppMessage({
-        title: news['Title'],
-        desc: news['Description'],
-        link: news['Url'],
-        imgUrl: news['PicUrl'],
-      trigger: function (res) {
-        //alert('用户点击发送给朋友');
-      },
-      success: function (res) {
-        //alert('已分享');
-      },
-      cancel: function (res) {
-        //alert('已取消');
-      },
-      fail: function (res) {
-        //alert(JSON.stringify(res));
-		    alert('分享失败。。。');
-      }
-    });
-
-
-	//分享到朋友圈
-    wx.onMenuShareTimeline({
-      title: news['Title'],
-      link: news['Url'],
-      imgUrl: news['PicUrl'],
-      trigger: function (res) {
-        //alert('用户点击分享到朋友圈');
-      },
-      success: function (res) {
-        //alert('已分享');
-      },
-      cancel: function (res) {
-        //alert('已取消');
-      },
-      fail: function (res) {
-        //alert(JSON.stringify(res));
-		    alert('分享失败。。。');
-      }
-    });
+	
 
 	//wx.error(function (res) {
 	//  alert(res.errMsg);
