@@ -44,17 +44,17 @@ function update_share() {
 		news['Url'] = 'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=south';
 	}
 	if (score <= 5) {
-		news['Description'] = "本宝宝不服，竟然才华工幼儿园毕业？戳链接来毕业",
-		news['PicUrl'] = "resourse/youeryuan.png",
+		news['Description'] = "本宝宝不服，竟然才华工幼儿园毕业？戳链接来毕业";
+		news['PicUrl'] = "resourse/youeryuan.png";
   }else if (score >= 6 && score <= 9) {
-		news['Description'] = "聪明才智的我才是个华工附小生？戳链接来毕业",
-		news['PicUrl'] = "resourse/xiaoxue.png",
+		news['Description'] = "聪明才智的我才是个华工附小生？戳链接来毕业";
+		news['PicUrl'] = "resourse/xiaoxue.png";
   }else if (score >= 10 && score <= 12) {
-		news['Description'] = "学富五车的我还是嫩嫩的华工高中生！戳链接来毕业",
-		news['PicUrl'] = "resourse/zhongxue.png",
+		news['Description'] = "学富五车的我还是嫩嫩的华工高中生！戳链接来毕业";
+		news['PicUrl'] = "resourse/zhongxue.png";
   }else if (score >= 13) {
-		news['Description'] = "本宝宝可是名正言顺从华工毕业！戳链接来毕业",
-		news['PicUrl'] = "resourse/daxue.png",
+		news['Description'] = "本宝宝可是名正言顺从华工毕业！戳链接来毕业";
+		news['PicUrl'] = "resourse/daxue.png";
   }
 }
 
