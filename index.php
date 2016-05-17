@@ -11,6 +11,7 @@ require "jssdk.php";
 $jssdk = new JSSDK("wx72dcc0c8ae1265f9", "ec008dac2e11c2b893366ca77bb7b4d0");
 // $jssdk = new JSSDK("wxd25012bb1da2b4cf", "d4624c36b6795d1d99dcf0547af5443d");
 $signPackage = $jssdk->GetSignPackage();
+
 ?>
 <!DOCTYPE html>
 
@@ -185,7 +186,7 @@ $signPackage = $jssdk->GetSignPackage();
 	<script>
 	wx.config
 	({
-		debug: true,//调试选true
+		debug:false,//调试选true
 		appId: '<?php echo $signPackage["appId"]; ?>',
 		timestamp: '<?php echo $signPackage["timestamp"]; ?>',
 		nonceStr: '<?php echo $signPackage["nonceStr"]; ?>',
@@ -193,15 +194,10 @@ $signPackage = $jssdk->GetSignPackage();
 		jsApiList:[
 			'onMenuShareTimeline',
 			'onMenuShareAppMessage',
-			'onMenuShareQQ',
-			'onMenuShareWeibo',
 		]
     });
 
 		wx.ready(function () {
-			document.querySelector('#onMenuShare').onclick = function () {
-				alert("赶快点击右上角...按钮来分享吧！");
-			}
 		});
 
 
@@ -251,8 +247,7 @@ $signPackage = $jssdk->GetSignPackage();
 	//  alert(res.errMsg);
 	//});
 </script>
-<script src="http://demo.open.weixin.qq.com/jssdk/js/api-6.1.js?ts=1420774989"> </script>
-
+<script src="http://demo.open.weixin.qq.com/jssdk/js/api-6.1.js?ts=1420774989"></script>
 
 </body>
 

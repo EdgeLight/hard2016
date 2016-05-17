@@ -1,8 +1,8 @@
 ﻿<?php
-// header("Content-Type:application/json;charset=utf-8");
+header("Content-Type:application/json;charset=utf-8");
 session_start();
 include("answer.php");
-$db = new PDO("mysql:host=localhost;dbname=hard2016","wechat","wechat@)!#",array(PDO::ATTR_PERSISTENT => true));
+$db = new PDO("mysql:host=localhost;dbname=game","root","",array(PDO::ATTR_PERSISTENT => true));
 $db -> query("SET NAMES 'UTF8'");
 $db -> query("SET CHARACTER SET UTF8");
 $db -> query("SET CHARACTER_SET_RESULTS=UTF8");
@@ -27,8 +27,7 @@ if($_SESSION['location'] == 'south')
 $game = array(
 	'step' => 'start',
 	'question' => null,
-	'score' => 0,
-	'news' => null
+	'score' => 0
 );
 
 $answer = $_POST['answer'];
@@ -39,11 +38,11 @@ if($answer == 'start')
 	try{
 		if($location == 'n')
 		{
-			$insert = $db -> exec("insert into step (id,wechat_id,location,q_num,chance,score,time) values ('','$wechat_id','n','0','2','0',NOW())");
+			$insert = $db -> exec("insert into step (id,wechat_id,location,q_num,chance,score,time) values ('','$wechat_id','n',0,'2','0',NOW())");
 		}
 		if($location == 's')
 		{
-			$insert = $db -> exec("insert into step (id,wechat_id,location,q_num,chance,score,time) values ('','$wechat_id','s','0','2','0',NOW())");
+			$insert = $db -> exec("insert into step (id,wechat_id,location,q_num,chance,score,time) values ('','$wechat_id','s',0,'2','0',NOW())");
 		}
 		$db -> commit();
 	}
@@ -54,13 +53,24 @@ if($answer == 'start')
 
 	if($location == 'n')
 	{
-		$q_num = rand(0,84);	//共85道
+		$q_num = mt_rand(0,84);		//共85道
 	}
 	if($location == 's')
 	{
-		$q_num = rand(0,136);	//共137道
+		$q_num = mt_rand(0,136);	//共137道
 	}
-
+	
+	$db -> beginTransaction();
+	try{
+		$insert = $db -> exec("insert into question_num (id,wechat_id,q_sql) values ('','$wechat_id','$q_num')");
+		
+		$db -> commit();
+	}
+	catch(Exception $e)
+	{
+		$db -> rollBack();
+	}	
+	
 	$db -> beginTransaction();
 	try{
 		$exec_update = $db -> exec("update step set q_num = '$q_num' where wechat_id = '$wechat_id'");
@@ -68,8 +78,8 @@ if($answer == 'start')
 	}catch(Exception $e)
 	{
 		$db -> rollBack();
-	}
-
+	}	
+	
  	$game['question'] = $q_num;	//题号传给前端
  	$json = json_encode($game);
  	echo $json;
@@ -89,8 +99,8 @@ if($answer == 'start')
 	$rs -> bindParam(1,$wechat_id);
 	$rs -> execute();
 	$chance = $rs->fetch();
-
-	if(($score['score'] <= 15) && ($chance['chance'] >= 0))	//不大于12个答题点且答题机会大于等于0
+	
+	if(($score['score'] <= 15) && ($chance['chance'] >= 0))	//不大于12个答题点且答题机会大于0
 	{
 		$rs = $db -> prepare("select q_num from step where wechat_id = ? order by time desc limit 1");
 		$rs -> setFetchMode(PDO::FETCH_ASSOC);
@@ -99,7 +109,7 @@ if($answer == 'start')
 		$rs -> execute();
 		$q_num = $rs->fetch();
 		$q_num = $q_num['q_num'];
-
+		
 		if($location == 'n')
 		{
 			if($answer == $answer_n[$q_num])
@@ -120,91 +130,60 @@ if($answer == 'start')
 				$isright = 0;
 			}
 		}
-
+		
+		$rs = $db -> prepare("select q_sql from question_num where wechat_id = ?");
+		$rs -> setFetchMode(PDO::FETCH_ASSOC);
+		$db -> setAttribute(PDO::ATTR_CASE,PDO::CASE_NATURAL);
+		$rs -> bindParam(1,$wechat_id);
+		$rs -> execute();
+		$q_num = $rs->fetchAll();
+		$row = $rs -> rowCount();
+	
+		for($i=0;$i<$row;$i++)
+		{
+			$q_num[$i] = $q_num[$i]['q_sql'];
+		}			
+						
+		if($location == 'n')
+		{
+			$numbers = range(0,84); 		
+		}
+		if($location == 's')
+		{
+			$numbers = range(0,136); 			
+		}		
+		
+		$num = array_diff($numbers,$q_num);
+		shuffle($num); 			 
+		$q_num = array_slice($num,0,1); 
+		$q_num = $q_num[0];
+				
 		$overtime = $_POST['overtime'];
-
+			
 		if(($overtime == 0) || ($isright == 0))	//超时或答错，前端传来超时信息与用户所选答案
 		{
-			if($chance['chance'] == 0)
+			if($chance['chance'] == 0)	//结束
 			{
-				if($location == 'n')
-				{
-					if($score['score'] >=0 && $score['score'] <= 5)
-					{
-						$news = array("Title" =>"毕业之旅",
-						"Description"=>"本宝宝不服，竟然才华工幼儿园毕业？戳链接来毕业",
-						"PicUrl" =>'resourse/youeryuan.png',
-						"Url" =>'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=north');
-					}
-					if($score['score'] >= 6 && $score['score'] <= 9)
-					{
-						$news = array("Title" =>"毕业之旅",
-						"Description"=>"聪明才智的我才是个华工附小生？戳链接来毕业",
-						"PicUrl" =>'resourse/xiaoxue.png', 
-						"Url" =>'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=north');
-					}
-					if($score['score'] >= 10 && $score['score'] <= 12)
-					{
-						$news = array("Title" =>"毕业之旅",
-						"Description"=>"学富五车的我还是嫩嫩的华工高中生！戳链接来毕业",
-						"PicUrl" =>'resourse/zhongxue.png', 
-						"Url" =>'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=north');
-					}
-					if($score['score'] >= 13 && $score['score'] <= 16)
-					{
-						$news = array("Title" =>"毕业之旅",
-						"Description"=>"本宝宝可是名正言顺从华工毕业！戳链接来毕业",
-						"PicUrl" =>'resourse/daxue.png', 
-						"Url" =>'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=north');
-					}
-
-				}else
-				{
-					if($score['score'] >=0 && $score['score'] <= 5)
-					{
-						$news = array("Title" =>"毕业之旅",
-						"Description"=>"本宝宝不服，竟然才华工幼儿园毕业？戳链接来毕业",
-						"PicUrl" =>'resourse/youeryuan.png',
-						"Url" =>'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=south');
-					}
-					if($score['score'] >= 6 && $score['score'] <= 9)
-					{
-						$news = array("Title" =>"毕业之旅",
-						"Description"=>"聪明才智的我才是个华工附小生？戳链接来毕业",
-						"PicUrl" =>'resourse/xiaoxue.png', 
-						"Url" =>'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=south');
-					}
-					if($score['score'] >= 10 && $score['score'] <= 12)
-					{
-						$news = array("Title" =>"毕业之旅",
-						"Description"=>"学富五车的我还是嫩嫩的华工高中生！戳链接来毕业",
-						"PicUrl" =>'resourse/zhongxue.png', 
-						"Url" =>'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=south');
-					}
-					if($score['score'] >= 13 && $score['score'] <= 16)
-					{
-						$news = array("Title" =>"毕业之旅",
-						"Description"=>"本宝宝可是名正言顺从华工毕业！戳链接来毕业",
-						"PicUrl" =>'resourse/daxue.png', 
-						"Url" =>'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=south');
-					}
-				}
-
-				$game['news'] = $news;
-
+				
 				$game['step'] = "over";	//游戏结束状态码
 
 				$game['score'] = $score['score'];	//最终成绩传给前端
 
 				$json = json_encode($game);
 				echo $json;
-
+				
 				$rs = $db -> prepare("delete from step where wechat_id = ?");
 				$rs -> setFetchMode(PDO::FETCH_ASSOC);
 				$db -> setAttribute(PDO::ATTR_CASE,PDO::CASE_NATURAL);
 				$rs -> bindParam(1,$wechat_id);
 				$rs -> execute();
-
+				
+				$rs = $db -> prepare("delete from question_num where wechat_id = ?");
+				$rs -> setFetchMode(PDO::FETCH_ASSOC);
+				$db -> setAttribute(PDO::ATTR_CASE,PDO::CASE_NATURAL);
+				$rs -> bindParam(1,$wechat_id);
+				$rs -> execute();
+				
 			}else
 			{
 				$db -> beginTransaction();
@@ -214,17 +193,8 @@ if($answer == 'start')
 				}catch(Exception $e)
 				{
 					$db -> rollBack();
-				}
-
-				if($location == 'n')
-				{
-					$q_num = rand(0,84);
-				}
-				if($location == 's')
-				{
-					$q_num = rand(0,136);
-				}
-
+				}				
+				
 				$db -> beginTransaction();
 				try{
 					$exec_update = $db -> exec("update step set q_num = '$q_num' where wechat_id = '$wechat_id'");
@@ -232,14 +202,28 @@ if($answer == 'start')
 				}catch(Exception $e)
 				{
 					$db -> rollBack();
+				}	
+				
+					
+				$db -> beginTransaction();
+				try{
+					$insert = $db -> exec("insert into question_num (id,wechat_id,q_sql) values ('','$wechat_id','$q_num')");
+					
+					$db -> commit();
 				}
-
+				catch(Exception $e)
+				{
+					$db -> rollBack();
+				}	
+												
 				$game['question'] = $q_num;	//题号传给前端
-
+				
+				$game['score'] = $score['score'];
+				
 				$game['step'] = "stay";	//停留在原答题点再答另一题状态码
 				$json = json_encode($game);
-				echo $json;
-			}
+				echo $json;	
+			}						
 		}else
 		{
 			$db -> beginTransaction();
@@ -250,16 +234,7 @@ if($answer == 'start')
 			{
 				$db -> rollBack();
 			}
-
-			if($location == 'n')
-			{
-				$q_num = rand(0,84);
-			}
-			if($location == 's')
-			{
-				$q_num = rand(0,136);
-			}
-
+			
 			$db -> beginTransaction();
 			try{
 				$exec_update = $db -> exec("update step set q_num = '$q_num' where wechat_id = '$wechat_id'");
@@ -267,15 +242,28 @@ if($answer == 'start')
 			}catch(Exception $e)
 			{
 				$db -> rollBack();
+			}	
+							
+			$db -> beginTransaction();
+			try{
+				$insert = $db -> exec("insert into question_num (id,wechat_id,q_sql) values ('','$wechat_id','$q_num')");
+				
+				$db -> commit();
 			}
-
+			catch(Exception $e)
+			{
+				$db -> rollBack();
+			}	
+			
 			$game['question'] = $q_num;	//题号传给前端
-
+			
+			$game['score'] = $score['score'];
+			
 			$game['step'] = "move";	//继续前进状态码
 			$json = json_encode($game);
 			echo $json;
 
-		}
+		}		
 	}
 }
 ?>

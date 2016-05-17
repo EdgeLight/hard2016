@@ -2,7 +2,7 @@
 var score = 0;                        //位置/分数
 var overtime = 1;                     //是否超时（0为超时）
 var answer = 'start';                 //选择的答案,值为'start'时为开始
-var q_num = 0;                        //题号
+var q_num = null;                     //题号
 var status = 'start';                 //状态码
 var timedown = 29;                    //倒计时显示时间(比总时间少1)
 var isanswer = false;                 //点击确定按钮提交后锁定计时器
@@ -10,7 +10,7 @@ var td;                               //声明倒计时器
 var area = 'north';                   //南北校
 var news = [];                        //分享用
 //--------------------------------------------------------------//
-area = window.location.href.split('location=')[1];               //获取南北校标志
+area = window.location.href.split('location=')[1];              //获取南北校标志
 //设置分享默认
 news['Title'] = '毕业之旅';
 news['Description'] = '本宝宝不服，竟然才华工幼儿园毕业？戳链接来毕业';
@@ -19,7 +19,7 @@ if (area == 'north') {
 }else {
 	news['Url'] = 'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=south';
 }
-news['PicUrl'] = 'resourse/youeryuan.jpg';
+news['PicUrl'] = 'resourse/youeryuan.png';
 
 //-------------------------------------------------------------//
 //     变量            前端             后台              处理
@@ -36,7 +36,27 @@ news['PicUrl'] = 'resourse/youeryuan.jpg';
 // 题号               question       game['question']    JSON
 // 状态码             status         game['step']        JSON
 //------------------------------------------------------------//
-
+//分享内容更新
+function update_share() {
+	if (area == 'north') {
+		news['Url'] = 'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=north';
+	}else {
+		news['Url'] = 'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=south';
+	}
+	if (score <= 5) {
+		news['Description'] = "本宝宝不服，竟然才华工幼儿园毕业？戳链接来毕业",
+		news['PicUrl'] = "resourse/youeryuan.png",
+  }else if (score >= 6 && score <= 9) {
+		news['Description'] = "聪明才智的我才是个华工附小生？戳链接来毕业",
+		news['PicUrl'] = "resourse/xiaoxue.png",
+  }else if (score >= 10 && score <= 12) {
+		news['Description'] = "学富五车的我还是嫩嫩的华工高中生！戳链接来毕业",
+		news['PicUrl'] = "resourse/zhongxue.png",
+  }else if (score >= 13) {
+		news['Description'] = "本宝宝可是名正言顺从华工毕业！戳链接来毕业",
+		news['PicUrl'] = "resourse/daxue.png",
+  }
+}
 
 // 与后台交互
 function ajax_start(){
@@ -53,7 +73,7 @@ function ajax_start(){
 				  status  = jsondata.step;    //start表示游戏开始，over表示游戏结束，move表示继续前进，stay表示停留在原答题点再答一次
 			 		q_num   = jsondata.question;//题目号(下一次的题号！！)
 			 		score   = jsondata.score;//最终成绩，也是当前题目数
-					news    = jsondata.news;//分享用数组
+					update_share();//每次请求后更新分享内容
 			    ajax_over();   //ajax返回后的函数（纯前端）
 				},
 	    error:function(){
@@ -89,7 +109,7 @@ $("#sub").on("click",function() {
 		overtime = 1;
     setTimeout(function() {                                  //防止AJAX传得过快导致同一题发送了两次
       ajax_start();                                          //有选项被选择时，单击确定按钮提交答案(AJAX)
-    },200)
+    },60)
   }
 })
 //判断对错
@@ -171,7 +191,7 @@ function ajax_over() {
 	if (status == 'start') {                                 //第一题情况下，延迟作答
 		setTimeout(function() {
 	    answer_q();
-		},100)
+		},40)
 	}
 }
 //初始化函数
@@ -192,7 +212,6 @@ $("#again_btn").on("click",function(){
 //显示成就页面
 function achievement_show() {
   if (score <= 5) {
-		console.log('幼儿园');
      $(".title").html('残念 只答对' + score + '题');
 		 $("#youeryuan").show();
   }else if (score >= 6 && score <= 9) {
@@ -216,7 +235,7 @@ var H = document.body.clientHeight;
 var moving = false;
 var arrive = false;
 var answering;
-var e = 1;
+var e = 0;
 
 /*moveTo函数下有四个子函数：
 horizontal() 控制梯仔水平运动
@@ -372,6 +391,22 @@ point[24] = {
 
 
 $(document).ready(function() {
+	loadImage('resource/one.gif', function(){              //调用图片预加载函数
+		console.log('图片已存在');
+	});
+	loadImage('resource/two.gif', function(){
+		console.log('图片已存在');
+	});
+	loadImage('resource/three.gif', function(){
+		console.log('图片已存在');
+	});
+	loadImage('resource/four.gif', function(){
+		console.log('图片已存在');
+	});
+	loadImage('resource/five.gif', function(){
+		console.log('图片已存在');
+	});
+
 	$(".startBtn").click(function() {                                     //开始按钮点击后（传一次ajax）
 		$(".rule").hide();                                                  //关闭开始提示
 		ajax_start();                                                       //通过AJAX取得题号
@@ -485,4 +520,12 @@ function change(mode) { //改变梯仔gif的函数
 	if(mode == 21){
 		_tizai.html("<img src='./resource/five.gif'>");
 	}
+}
+function loadImage(url, callback) {     //图片预加载
+    var img = new Image();
+    img.onload = function(){
+        img.onload = null;
+        callback(img);
+    }
+    img.src = url;
 }
