@@ -1,22 +1,29 @@
-
 <?php
+header("Content-Type: text/html; charset=UTF-8");
 session_start();
 if (strpos(addslashes($_SERVER['HTTP_USER_AGENT']), 'MicroMessenger') != false) {
-	$_SESSION['wechat_id'] = $_GET['wechatId'];
-	$_SESSION['location'] = $_GET['location'];
+    if (empty($_GET['wechatId'])) {
+        echo "<script>alert(\"系统出现错误\");</script>";
+        exit();
+    }
+    $_SESSION['wechat_id'] = $_GET['wechatId'];
+    $_SESSION['location'] = $_GET['location'];
 } else {
-  // $this->error('请从微信端登录');
+    echo "<script>alert(\"请从微信端登录\");</script>";
+    exit();
 }
 require "jssdk.php";
-$jssdk = new JSSDK("wxd25012bb1da2b4cf", "d4624c36b6795d1d99dcf0547af5443d");//appid 与 appesecret?
+$jssdk = new JSSDK("wx72dcc0c8ae1265f9", "ec008dac2e11c2b893366ca77bb7b4d0");
+// $jssdk = new JSSDK("wxd25012bb1da2b4cf", "d4624c36b6795d1d99dcf0547af5443d");
 $signPackage = $jssdk->GetSignPackage();
+
 ?>
 <!DOCTYPE html>
 
 <html>
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<link rel="stylesheet" type="text/css" href="style/style.css">
 	<title>毕业之旅</title>
 </head>
@@ -60,7 +67,7 @@ $signPackage = $jssdk->GetSignPackage();
 	<div id="tizai">
 		<img src="resource/one.gif">
 	</div>
-	<!-- 开始 游戏规则页面 -->
+  <!-- 开始 游戏规则页面 -->
 	<div class="rule popover">
 		<div class="text">
 			<p class="_title">游戏规则</p>
@@ -70,8 +77,14 @@ $signPackage = $jssdk->GetSignPackage();
 				我没有好好珍惜<br>
 				如果能重来<br>
 				我会选择<br>
-				从华工毕业！！
+				从华工毕业！！<br>
+				(提示：游戏共有16个关卡，<br>
+				而毕业路上的你只有三次<br>
+				答题机会，每题只有30秒<br>
+				思考时间，沿途欣赏美景的<br>
+				时候别忘了认真思考哦！)<br>
 			</p>
+			<div class="btn-replace"></div>
 		</div>
 		<!-- 开始按钮 -->
 		<div class="button startBtn" data-name="游戏开始"><p>游戏开始</p></div>
@@ -110,6 +123,8 @@ $signPackage = $jssdk->GetSignPackage();
 						<p id="selection_d"><p/>
 					</div>
 				</div>
+				<!-- 计时器和按钮占位框 -->
+				<div class="replace"></div>
 				<!-- 倒计时 -->
 				<div class="count" id="timedown">30s</div>
 				<div class="button" id="sub"><p>确定</p></div>
@@ -179,119 +194,71 @@ $signPackage = $jssdk->GetSignPackage();
 	<script type="text/javascript" src="js/question.js"></script>
 	<script type="text/javascript" src="js/game.js"></script>
 	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"> </script>
-	wx.config
-	({
-		debug: false,//调试选true
-		appId: '<?php echo $signPackage["appId"];?>',
-		timestamp: <?php echo $signPackage["timestamp"];?>,
-		nonceStr: '<?php echo $signPackage["nonceStr"];?>',
-		signature: '<?php echo $signPackage["signature"];?>',
+	<script>
+	wx.config({
+		debug:false,//调试选true
+		appId: '<?php echo $signPackage["appId"]; ?>',
+		timestamp: '<?php echo $signPackage["timestamp"]; ?>',
+		nonceStr: '<?php echo $signPackage["nonceStr"]; ?>',
+		signature: '<?php echo $signPackage["signature"]; ?>',
 		jsApiList:[
 			'onMenuShareTimeline',
 			'onMenuShareAppMessage',
-			'onMenuShareQQ',
-			'onMenuShareWeibo',
 		]
     });
 
 		wx.ready(function () {
-			document.querySelector('#onMenuShare').onclick = function () {
-				alert("赶快点击右上角...按钮来分享吧！");
-			};
-
-		//分享给朋友
-    wx.onMenuShareAppMessage({
-        title: '<?php echo $news['Title'];?>',
-        desc: '<?php echo $news['Description'];?>',
-        link: '<?php echo $news['Url'];?>',
-        imgUrl: '<?php echo $news['PicUrl'];?>',
-      trigger: function (res) {
-        //alert('用户点击发送给朋友');
-      },
-      success: function (res) {
-        //alert('已分享');
-      },
-      cancel: function (res) {
-        //alert('已取消');
-      },
-      fail: function (res) {
-        //alert(JSON.stringify(res));
-		alert('分享失败。。。');
-      }
-    });
+				//分享给朋友
+			wx.onMenuShareAppMessage({
+				title: news['Title'],
+				desc: news['Description'],
+				link: news['Url'],
+				imgUrl: news['PicUrl'],
+			trigger: function (res) {
+				//alert('用户点击发送给朋友');
+			},
+			success: function (res) {
+				//alert('已分享');
+			},
+			cancel: function (res) {
+				//alert('已取消');
+			},
+			fail: function (res) {
+				//alert(JSON.stringify(res));
+					alert('分享失败。。。');
+			}
+			});
 
 
-	//分享到朋友圈
-    wx.onMenuShareTimeline({
-      title: '<?php echo $news['Title'];?>',
-      link: '<?php echo $news['Url'];?>',
-      imgUrl: '<?php echo $news['PicUrl'];?>',
-      trigger: function (res) {
-        //alert('用户点击分享到朋友圈');
-      },
-      success: function (res) {
-        //alert('已分享');
-      },
-      cancel: function (res) {
-        //alert('已取消');
-      },
-      fail: function (res) {
-        //alert(JSON.stringify(res));
-		alert('分享失败。。。');
-      }
-    });
+			//分享到朋友圈
+			wx.onMenuShareTimeline({
+			title: news['Title'],
+			link: news['Url'],
+			imgUrl: news['PicUrl'],
+			trigger: function (res) {
+				//alert('用户点击分享到朋友圈');
+			},
+			success: function (res) {
+				//alert('已分享');
+			},
+			cancel: function (res) {
+				//alert('已取消');
+			},
+			fail: function (res) {
+				//alert(JSON.stringify(res));
+					alert('分享失败。。。');
+			}
+			});
+		});
 
-	//分享到QQ
-    wx.onMenuShareQQ({
-      title: '<?php echo $news['Title'];?>',
-      desc: '<?php echo $news['Description'];?>',
-      link: '<?php echo $news['Url'];?>',
-      imgUrl: '<?php echo $news['PicUrl'];?>',
-      trigger: function (res) {
-        //alert('用户点击分享到QQ');
-      },
-      complete: function (res) {
-        //alert(JSON.stringify(res));
-      },
-      success: function (res) {
-        //alert('已分享');
-      },
-      cancel: function (res) {
-        //alert('已取消');
-      },
-      fail: function (res) {
-        //alert(JSON.stringify(res));
-		alert('分享失败。。。');
-      }
-    });
-  // “分享到微博”
-    wx.onMenuShareWeibo({
-      title: '<?php echo $news['Title'];?>',
-      desc: '<?php echo $news['Description'];?>',
-      link: '<?php echo $news['Url'];?>',
-      imgUrl: '<?php echo $news['PicUrl'];?>',
-      trigger: function (res) {
-        //alert('用户点击分享到微博');
-      },
-      complete: function (res) {
-        //alert(JSON.stringify(res));
-      },
-      success: function (res) {
-        //alert('已分享');
-      },
-      cancel: function (res) {
-        //alert('已取消');
-      },
-      fail: function (res) {
-        //alert(JSON.stringify(res));
-		alert('分享失败。。。');
-      }
-	});
+
+
+
 	//wx.error(function (res) {
 	//  alert(res.errMsg);
 	//});
 </script>
-<script src="http://demo.open.weixin.qq.com/jssdk/js/api-6.1.js?ts=1420774989"> </script>	
+
 
 </body>
 

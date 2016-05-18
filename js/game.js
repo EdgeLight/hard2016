@@ -528,10 +528,24 @@ function change(mode) { //改变梯仔gif的函数
 	}
 	if (mode == 19) {
 		_tizai.html("<img src='./resource/four.gif'>");
+<<<<<<< HEAD
+	}
+	if(mode == 21){
+		_tizai.html("<img src='./resource/five.gif'>");
+=======
+>>>>>>> dffe4616f63b2b555c99542be2ff984a7125b94a
 	}
 	if(mode == 21){
 		_tizai.html("<img src='./resource/five.gif'>");
 	}
+}
+function loadImage(url, callback) {     //图片预加载
+    var img = new Image();
+    img.onload = function(){
+        img.onload = null;
+        callback(img);
+    }
+    img.src = url;
 }
 function loadImage(url, callback) {     //图片预加载
     var img = new Image();
