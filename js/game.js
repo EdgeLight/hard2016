@@ -15,7 +15,7 @@ var news = {
 	"Title" : "毕业之旅",
 	"Description" : "本宝宝不服，竟然才华工幼儿园毕业？戳链接来毕业",
 	"Url" : "",
-	"PicUrl" : "./resourse/youeryuan.png"
+	"PicUrl" : "resourse/youeryuan.png"
 };
 if (area == 'north') {
 	news['Url'] = 'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=north';
@@ -47,17 +47,56 @@ function update_share() {
 	}
 	if (score <= 5) {
 		news['Description'] = "本宝宝不服，机智如我竟然才华工幼儿园毕业？";
-		news['PicUrl'] = "./resourse/youeryuan.png";
+		news['PicUrl'] = "resourse/youeryuan.png";
   }else if (score >= 6 && score <= 9) {
 		news['Description'] = "读了十几年书居然才是华工小学生？不服！";
-		news['PicUrl'] = "./resourse/xiaoxue.png";
+		news['PicUrl'] = "resourse/xiaoxue.png";
   }else if (score >= 10 && score <= 12) {
 		news['Description'] = "学富五车的我还是嫩嫩的华工高中生！";
-		news['PicUrl'] = "./resourse/zhongxue.png";
+		news['PicUrl'] = "resourse/zhongxue.png";
   }else if (score >= 13) {
 		news['Description'] = "本宝宝可是名正言顺从华工毕业！";
-		news['PicUrl'] = "./resourse/daxue.png";
+		news['PicUrl'] = "resourse/daxue.png";
   }
+		//分享给朋友
+		wx.onMenuShareAppMessage({
+			title: news['Title'],
+			desc: news['Description'],
+			link: news['Url'],
+			imgUrl: news['PicUrl'],
+			trigger: function (res) {
+				//alert('用户点击发送给朋友');
+			},
+			success: function (res) {
+				//alert('已分享');
+			},
+			cancel: function (res) {
+				//alert('已取消');
+			},
+			fail: function (res) {
+				//alert(JSON.stringify(res));
+					alert('分享失败。。。');
+			}
+		});
+		//分享到朋友圈
+		wx.onMenuShareTimeline({
+			title: news['Title'],
+			link: news['Url'],
+			imgUrl: news['PicUrl'],
+			trigger: function (res) {
+				//alert('用户点击分享到朋友圈');
+			},
+			success: function (res) {
+				//alert('已分享');
+			},
+			cancel: function (res) {
+				//alert('已取消');
+			},
+			fail: function (res) {
+				//alert(JSON.stringify(res));
+					alert('分享失败。。。');
+			}
+		});
 }
 
 // 与后台交互
@@ -394,15 +433,15 @@ point[24] = {
 
 
 $(document).ready(function() {
-	loadImage('./resource/one.gif', function(){              //调用图片预加载函数
+	loadImage('resource/one.gif', function(){              //调用图片预加载函数
 	});
-	loadImage('./resource/two.gif', function(){
+	loadImage('resource/two.gif', function(){
 	});
-	loadImage('./resource/three.gif', function(){
+	loadImage('resource/three.gif', function(){
 	});
-	loadImage('./resource/four.gif', function(){
+	loadImage('resource/four.gif', function(){
 	});
-	loadImage('./resource/five.gif', function(){
+	loadImage('resource/five.gif', function(){
 	});
 
 	$(".startBtn").click(function() {                                     //开始按钮点击后（传一次ajax）
