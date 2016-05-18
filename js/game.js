@@ -528,12 +528,6 @@ function change(mode) { //改变梯仔gif的函数
 	}
 	if (mode == 19) {
 		_tizai.html("<img src='./resource/four.gif'>");
-<<<<<<< HEAD
-	}
-	if(mode == 21){
-		_tizai.html("<img src='./resource/five.gif'>");
-=======
->>>>>>> dffe4616f63b2b555c99542be2ff984a7125b94a
 	}
 	if(mode == 21){
 		_tizai.html("<img src='./resource/five.gif'>");
