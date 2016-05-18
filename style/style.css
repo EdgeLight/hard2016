@@ -4,10 +4,10 @@
 }
 @media screen and (max-height: 550px) {
 	body{
-		-webkit-transform: scale(0.86);
-		-ms-transform: scale(0.86);
-		-o-transform: scale(0.86);
-		transform: scale(0.86);
+		-webkit-transform: scale(0.80);
+		-ms-transform: scale(0.80);
+		-o-transform: scale(0.80);
+		transform: scale(0.80);
 	}
 }
 html,body{
@@ -29,13 +29,14 @@ body {
 	top: 0px;
 	left: 0px;
 	width: 3200px;
-	height: 2195px;
+	height: 2188px;
 	overflow: hidden;
-
+ 
 	-webkit-transform: translate3d(0,0,0);
 	-ms-transform: translate3d(0,0,0);
 	-o-transform: translate3d(0,0,0);
-	transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0); 
+	
 	-webkit-backface-visibility: hidden;
 	-moz-backface-visibility: hidden;
 	-ms-backface-visibility: hidden;
@@ -46,9 +47,137 @@ body {
 	-ms-perspective: 1000;
 	perspective: 1000;
 }
-.bg{
-	width: 12.5%;
-	float: left;
+.bg{                      /*  一些给每张图片定位 */
+	width: 400px;
+	position: absolute;
+}
+.bg_01{
+	top: 0;
+	left: 0;
+}
+.bg_02{
+	top: 0;
+	left: 400px;
+}
+.bg_03{
+	top: 0;
+	left: 800px;
+}
+.bg_04{
+	top: 0;
+	left: 1200px;
+}
+.bg_05{
+	top: 0;
+	left: 1600px;
+}
+.bg_06{
+	top: 0;
+	left: 2000px;
+}
+.bg_07{
+	top: 0;
+	left: 2400px;
+}
+.bg_08{
+	top: 0;
+	left: 2800px;
+}
+.bg_09{
+	top: 547px;
+	left: 0;
+}
+.bg_10{
+	top: 547px;
+	left: 400px;
+}
+.bg_11{
+	top: 547px;
+	left: 800px;
+}
+.bg_12{
+	top: 547px;
+	left: 1200px;
+}
+.bg_13{
+	top: 547px;
+	left: 1600px;
+}
+.bg_14{
+	top: 547px;
+	left: 2000px;
+}
+.bg_15{
+	top: 547px;
+	left: 2400px;
+}
+.bg_16{
+	top: 547px;
+	left: 2800px;
+}
+.bg_17{
+	top: 1094px;
+	left: 0;
+}
+.bg_18{
+	top: 1094px;
+	left: 400px;
+}
+.bg_19{
+	top: 1094px;
+	left: 800px;
+}
+.bg_20{
+	top: 1094px;
+	left: 1200px;
+}
+.bg_21{
+	top: 1094px;
+	left: 1600px;
+}
+.bg_22{
+	top: 1094px;
+	left: 2000px;
+}
+.bg_23{
+	top: 1094px;
+	left: 2400px;
+}
+.bg_24{
+	top: 1094px;
+	left: 2800px;
+}
+.bg_25{
+	top: 1646.25px;
+	left: 0;
+}
+.bg_26{
+	top: 1641px;
+	left: 400px;
+}
+.bg_27{
+	top: 1641px;
+	left: 800px;
+}
+.bg_28{
+	top: 1641px;
+	left: 1200px;
+}
+.bg_29{
+	top: 1641px;
+	left: 1600px;
+}
+.bg_30{
+	top: 1641px;
+	left: 2000px;
+}
+.bg_31{
+	top: 1641px;
+	left: 2400px;
+}
+.bg_32{
+	top: 1641px;
+	left: 2800px;
 }
 #tizai{
 	width: 63px;
@@ -66,7 +195,7 @@ body {
 	min-height: 410px;
 	background-color: rgba(255,255,255,0.85);
 	position: fixed;
-	top: 35px;
+	top: 30px;
 	margin:0 auto;
 	left: 0;
 	right: 0;

@@ -1,22 +1,22 @@
 <?php
 header("Content-Type: text/html; charset=UTF-8");
 session_start();
-if (strpos(addslashes($_SERVER['HTTP_USER_AGENT']), 'MicroMessenger') != false) {
-    if (empty($_GET['wechatId'])) {
-        echo "<script>alert(\"系统出现错误\");</script>";
-        exit();
-    }
-    $_SESSION['wechat_id'] = $_GET['wechatId'];
-    $_SESSION['location'] = $_GET['location'];
-} else {
-    echo "<script>alert(\"请从微信端登录\");</script>";
-    exit();
-}
-require "jssdk.php";
-$jssdk = new JSSDK("wx72dcc0c8ae1265f9", "ec008dac2e11c2b893366ca77bb7b4d0");
-// $jssdk = new JSSDK("wxd25012bb1da2b4cf", "d4624c36b6795d1d99dcf0547af5443d");
-$signPackage = $jssdk->GetSignPackage();
-
+// if (strpos(addslashes($_SERVER['HTTP_USER_AGENT']), 'MicroMessenger') != false) {
+//     if (empty($_GET['wechatId'])) {
+//         echo "<script>alert(\"系统出现错误\");</script>";
+//         exit();
+//     }
+//     $_SESSION['wechat_id'] = $_GET['wechatId'];
+//     $_SESSION['location'] = $_GET['location'];
+// } else {
+//     echo "<script>alert(\"请从微信端登录\");</script>";
+//     exit();
+// }
+// require "jssdk.php";
+// $jssdk = new JSSDK("wx72dcc0c8ae1265f9", "ec008dac2e11c2b893366ca77bb7b4d0");
+// // $jssdk = new JSSDK("wxd25012bb1da2b4cf", "d4624c36b6795d1d99dcf0547af5443d");
+// $signPackage = $jssdk->GetSignPackage();
+//
 ?>
 <!DOCTYPE html>
 
@@ -28,41 +28,41 @@ $signPackage = $jssdk->GetSignPackage();
 	<title>毕业之旅</title>
 </head>
 <body>
-	<!-- 地图 -->
-	<div id="bg">
-		<img src="resource/01.png" alt="" class="bg">
-		<img src="resource/02.png" alt="" class="bg">
-		<img src="resource/03.png" alt="" class="bg">
-		<img src="resource/04.png" alt="" class="bg">
-		<img src="resource/05.png" alt="" class="bg">
-		<img src="resource/06.png" alt="" class="bg">
-		<img src="resource/07.png" alt="" class="bg">
-		<img src="resource/08.png" alt="" class="bg">
-		<img src="resource/09.png" alt="" class="bg">
-		<img src="resource/10.png" alt="" class="bg">
-		<img src="resource/11.png" alt="" class="bg">
-		<img src="resource/12.png" alt="" class="bg">
-		<img src="resource/13.png" alt="" class="bg">
-		<img src="resource/14.png" alt="" class="bg">
-		<img src="resource/15.png" alt="" class="bg">
-		<img src="resource/16.png" alt="" class="bg">
-		<img src="resource/17.png" alt="" class="bg">
-		<img src="resource/18.png" alt="" class="bg">
-		<img src="resource/19.png" alt="" class="bg">
-		<img src="resource/20.png" alt="" class="bg">
-		<img src="resource/21.png" alt="" class="bg">
-		<img src="resource/22.png" alt="" class="bg">
-		<img src="resource/23.png" alt="" class="bg">
-		<img src="resource/24.png" alt="" class="bg">
-		<img src="resource/25.png" alt="" class="bg">
-		<img src="resource/26.png" alt="" class="bg">
-		<img src="resource/27.png" alt="" class="bg">
-		<img src="resource/28.png" alt="" class="bg">
-		<img src="resource/29.png" alt="" class="bg">
-		<img src="resource/30.png" alt="" class="bg">
-		<img src="resource/31.png" alt="" class="bg">
-		<img src="resource/32.png" alt="" class="bg">
-	</div>
+    <!-- 地图 -->
+  	<div id="bg">
+  		<img src="resource/01.png" alt="" class="bg bg_01">
+  		<img src="resource/02.png" alt="" class="bg bg_02">
+  		<img src="resource/03.png" alt="" class="bg bg_03">
+  		<img src="resource/04.png" alt="" class="bg bg_04">
+  		<img src="resource/05.png" alt="" class="bg bg_05">
+  		<img src="resource/06.png" alt="" class="bg bg_06">
+  		<img src="resource/07.png" alt="" class="bg bg_07">
+  		<img src="resource/08.png" alt="" class="bg bg_08">
+  		<img src="resource/09.png" alt="" class="bg bg_09">
+  		<img src="resource/10.png" alt="" class="bg bg_10">
+  		<img src="resource/11.png" alt="" class="bg bg_11">
+  		<img src="resource/12.png" alt="" class="bg bg_12">
+  		<img src="resource/13.png" alt="" class="bg bg_13">
+  		<img src="resource/14.png" alt="" class="bg bg_14">
+  		<img src="resource/15.png" alt="" class="bg bg_15">
+  		<img src="resource/16.png" alt="" class="bg bg_16">
+  		<img src="resource/17.png" alt="" class="bg bg_17">
+  		<img src="resource/18.png" alt="" class="bg bg_18">
+  		<img src="resource/19.png" alt="" class="bg bg_19">
+  		<img src="resource/20.png" alt="" class="bg bg_20">
+  		<img src="resource/21.png" alt="" class="bg bg_21">
+  		<img src="resource/22.png" alt="" class="bg bg_22">
+  		<img src="resource/23.png" alt="" class="bg bg_23">
+  		<img src="resource/24.png" alt="" class="bg bg_24">
+  		<img src="resource/25.png" alt="" class="bg bg_25">
+  		<img src="resource/26.png" alt="" class="bg bg_26">
+  		<img src="resource/27.png" alt="" class="bg bg_27">
+  		<img src="resource/28.png" alt="" class="bg bg_28">
+  		<img src="resource/29.png" alt="" class="bg bg_29">
+  		<img src="resource/30.png" alt="" class="bg bg_30">
+  		<img src="resource/31.png" alt="" class="bg bg_31">
+  		<img src="resource/32.png" alt="" class="bg bg_32">
+  	</div>
 	<!-- 梯仔 -->
 	<div id="tizai">
 		<img src="resource/one.gif">
@@ -193,8 +193,8 @@ $signPackage = $jssdk->GetSignPackage();
 	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="js/question.js"></script>
 	<script type="text/javascript" src="js/game.js"></script>
-	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"> </script>
-	<script>
+	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script type="text/javascript">
 	wx.config({
 		debug:false,//调试选true
 		appId: '<?php echo $signPackage["appId"]; ?>',
