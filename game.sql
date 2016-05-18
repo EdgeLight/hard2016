@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 4.1.8
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: 2016-05-17 14:06:48
--- 服务器版本： 5.6.17
--- PHP Version: 5.5.12
+-- Host: localhost
+-- Generation Time: 2016-05-18 08:33:02
+-- 服务器版本： 5.5.47-0ubuntu0.12.04.1-log
+-- PHP Version: 5.3.10-1ubuntu3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `game`
+-- Database: `hard2016`
 --
 
 -- --------------------------------------------------------
@@ -30,8 +30,9 @@ CREATE TABLE IF NOT EXISTS `question_num` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `wechat_id` varchar(80) NOT NULL,
   `q_sql` int(11) NOT NULL COMMENT '已经出过的题号',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='为防止出重复题目所建' AUTO_INCREMENT=0 ;
+  PRIMARY KEY (`id`),
+  KEY `wechat_id` (`wechat_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='为防止出重复题目所建' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -46,9 +47,10 @@ CREATE TABLE IF NOT EXISTS `step` (
   `q_num` int(4) NOT NULL,
   `chance` int(10) NOT NULL,
   `score` int(10) NOT NULL,
-  `time` timestamp NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `wechat_id` (`wechat_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
