@@ -68,13 +68,14 @@ function ajax_start(){
 				 overtime:overtime, //overtime为0时表示超时
 				 answer:answer //选择的选项，'start'表示开始答题(虽然不一定接start，还是放在这里)
 	    },
-	    dataType: 'json',
+	    dataType: 'text',
 	    success:function(jsondata) {
-				  status  = jsondata.step;    //start表示游戏开始，over表示游戏结束，move表示继续前进，stay表示停留在原答题点再答一次
-			 		q_num   = jsondata.question;//题目号(下一次的题号！！)
-			 		score   = jsondata.score;//最终成绩，也是当前题目数
-					update_share();//每次请求后更新分享内容
-			    ajax_over();   //ajax返回后的函数（纯前端）
+				//   status  = jsondata.step;    //start表示游戏开始，over表示游戏结束，move表示继续前进，stay表示停留在原答题点再答一次
+			 	// 	q_num   = jsondata.question;//题目号(下一次的题号！！)
+			 	// 	score   = jsondata.score;//最终成绩，也是当前题目数
+				// 	update_share();//每次请求后更新分享内容
+			    // ajax_over();   //ajax返回后的函数（纯前端）
+				console.log(jsondata);
 				},
 	    error:function(a,b,c){
 			console.log(a,b,c);
