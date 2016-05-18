@@ -2,7 +2,7 @@
 // header("Content-Type:application/json;charset=utf-8");
 session_start();
 include "answer.php";
-$db = new PDO("mysql:host=localhost;dbname=hard2016", "wechat", "wechat@)!#", array(PDO::ATTR_PERSISTENT => true));
+$db = new PDO("mysql:host=localhost;dbname=hard2016", "wechat", "wechat@)!#");
 $db->query("SET NAMES 'UTF8'");
 $db->query("SET CHARACTER SET UTF8");
 $db->query("SET CHARACTER_SET_RESULTS=UTF8");
@@ -13,9 +13,14 @@ $wechat_id = $_SESSION['wechat_id'];
 
 if ($_SESSION['location'] == 'north') {
     $location = 'n';
-}
-if ($_SESSION['location'] == 'south') {
+} elseif ($_SESSION['location'] == 'south') {
     $location = 's';
+} else {
+    $array['msg'] = 'request error';
+    $array['state'] = false;
+    $json = json_encode($array);
+    echo $json;
+    exit();
 }
 
 // $wechat_id = "123456";//测试用

@@ -2,10 +2,15 @@
 header("Content-Type: text/html; charset=UTF-8");
 session_start();
 if (strpos(addslashes($_SERVER['HTTP_USER_AGENT']), 'MicroMessenger') != false) {
+    if (empty($_GET['wechatId'])) {
+        echo "<script>alert(\"系统出现错误\");</script>";
+        exit();
+    }
     $_SESSION['wechat_id'] = $_GET['wechatId'];
     $_SESSION['location'] = $_GET['location'];
 } else {
-    // $this->error('请从微信端登录');
+    echo "<script>alert(\"请从微信端登录\");</script>";
+    exit();
 }
 require "jssdk.php";
 $jssdk = new JSSDK("wx72dcc0c8ae1265f9", "ec008dac2e11c2b893366ca77bb7b4d0");
