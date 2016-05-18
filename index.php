@@ -196,7 +196,7 @@ session_start();
 	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 	<script type="text/javascript">
 	wx.config({
-		debug:false,//调试选true
+		debug:true,//调试选true
 		appId: '<?php echo $signPackage["appId"]; ?>',
 		timestamp: '<?php echo $signPackage["timestamp"]; ?>',
 		nonceStr: '<?php echo $signPackage["nonceStr"]; ?>',
