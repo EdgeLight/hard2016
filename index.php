@@ -228,26 +228,6 @@ session_start();
 					alert('分享失败。。。');
 			}
 			});
-			wx.onMenuShareAppMessage({
-				title: 'test',
-				desc: news['Description'],
-				link: news['Url'],
-				imgUrl: news['PicUrl'],
-			trigger: function (res) {
-				//alert('用户点击发送给朋友');
-			},
-			success: function (res) {
-				//alert('已分享');
-			},
-			cancel: function (res) {
-				//alert('已取消');
-			},
-			fail: function (res) {
-				//alert(JSON.stringify(res));
-					alert('分享失败。。。');
-			}
-			});
-
 			//分享到朋友圈
 			wx.onMenuShareTimeline({
 			title: news['Title'],
