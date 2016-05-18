@@ -257,7 +257,7 @@ var tizai = {
 	left: 166,
 	width: 41,
 	height: 67,
-	speed : 0.06
+	speed : 0.08
 }
 var bg = {
 	top: 0,
