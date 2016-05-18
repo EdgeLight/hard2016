@@ -10,6 +10,22 @@
 		transform: scale(0.80);
 	}
 }
+@media screen and (max-height: 500px) {
+	body{
+		-webkit-transform: scale(0.70);
+		-ms-transform: scale(0.70);
+		-o-transform: scale(0.70);
+		transform: scale(0.70);
+	}
+}
+@media screen and (max-height: 450px) {
+	body{
+		-webkit-transform: scale(0.60);
+		-ms-transform: scale(0.60);
+		-o-transform: scale(0.60);
+		transform: scale(0.60);
+	}
+}
 html,body{
 	width:100%;
 	height:100%;
@@ -148,7 +164,7 @@ body {
 	left: 2800px;
 }
 .bg_25{
-	top: 1646.25px;
+	top: 1641px;
 	left: 0;
 }
 .bg_26{

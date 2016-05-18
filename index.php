@@ -132,7 +132,7 @@ session_start();
 	<!-- 对/错反馈 -->
 	<div class="right result popover">
 		<div class="info">
-			<p>恭喜您答对了，<br>继续旅程吧</p>
+			<p>&nbsp;&nbsp;答对啦！<br>恭喜你<br>离毕业又近了一步!</p>
 		</div>
 		<div class="button nextBtn">继续</div>
 	</div>
