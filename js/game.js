@@ -367,7 +367,7 @@ point[19] = {
 	type: 1
 }
 point[20] = {
-	top: 1700,
+	top: 1800,
 	left: 2748,
 	type: 0
 }
