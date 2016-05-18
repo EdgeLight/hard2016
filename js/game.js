@@ -1,16 +1,26 @@
-
 //---------------------前后端交互用变量---------------------------//
 var score = 0;                        //位置/分数
 var overtime = 1;                     //是否超时（0为超时）
 var answer = 'start';                 //选择的答案,值为'start'时为开始
-var q_num = 0;                        //题号
+var q_num = null;                     //题号
 var status = 'start';                 //状态码
 var timedown = 29;                    //倒计时显示时间(比总时间少1)
 var isanswer = false;                 //点击确定按钮提交后锁定计时器
 var td;                               //声明倒计时器
-var area = 'north';                        //南北校
+var area = 'north';                   //南北校
+var news = [];                        //分享用
 //--------------------------------------------------------------//
-//var area = windows.location.href.split('status=')[1];           //获取南北校标志
+area = window.location.href.split('location=')[1];              //获取南北校标志
+//设置分享默认
+news['Title'] = '毕业之旅';
+news['Description'] = '本宝宝不服，机智如我竟然才华工幼儿园毕业？';
+if (area == 'north') {
+	news['Url'] = 'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=north';
+}else {
+	news['Url'] = 'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=south';
+}
+news['PicUrl'] = 'resourse/youeryuan.png';
+
 //-------------------------------------------------------------//
 //     变量            前端             后台              处理
 //  题目内容          question                        JSON题号，前端从question取得
@@ -26,7 +36,27 @@ var area = 'north';                        //南北校
 // 题号               question       game['question']    JSON
 // 状态码             status         game['step']        JSON
 //------------------------------------------------------------//
-
+//分享内容更新
+function update_share() {
+	if (area == 'north') {
+		news['Url'] = 'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=north';
+	}else {
+		news['Url'] = 'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=south';
+	}
+	if (score <= 5) {
+		news['Description'] = "本宝宝不服，机智如我竟然才华工幼儿园毕业？";
+		news['PicUrl'] = "resourse/youeryuan.png";
+  }else if (score >= 6 && score <= 9) {
+		news['Description'] = "读了十几年书居然才是华工小学生？不服！";
+		news['PicUrl'] = "resourse/xiaoxue.png";
+  }else if (score >= 10 && score <= 12) {
+		news['Description'] = "学富五车的我还是嫩嫩的华工高中生！";
+		news['PicUrl'] = "resourse/zhongxue.png";
+  }else if (score >= 13) {
+		news['Description'] = "本宝宝可是名正言顺从华工毕业！";
+		news['PicUrl'] = "resourse/daxue.png";
+  }
+}
 
 // 与后台交互
 function ajax_start(){
@@ -43,9 +73,22 @@ function ajax_start(){
 				  status  = jsondata.step;    //start表示游戏开始，over表示游戏结束，move表示继续前进，stay表示停留在原答题点再答一次
 			 		q_num   = jsondata.question;//题目号(下一次的题号！！)
 			 		score   = jsondata.score;//最终成绩，也是当前题目数
+					update_share();//每次请求后更新分享内容
 			    ajax_over();   //ajax返回后的函数（纯前端）
 				},
-	    error:function(){
+		// 下面是浩劫调试
+		// dataType: 'text',
+	    // success:function(data) {
+		// 	console.log(data);
+		// 	var jsondata = JSON.parse(data);
+		// 		  status  = jsondata.step;    //start表示游戏开始，over表示游戏结束，move表示继续前进，stay表示停留在原答题点再答一次
+		// 	 		q_num   = jsondata.question;//题目号(下一次的题号！！)
+		// 	 		score   = jsondata.score;//最终成绩，也是当前题目数
+		// 			update_share();//每次请求后更新分享内容
+		// 	    ajax_over();   //ajax返回后的函数（纯前端）
+		// 		},
+	    error:function(a,b,c){
+			console.log(a,b,c);
 	    	alert('发生错误！');
 	    }
 	  })
@@ -78,7 +121,7 @@ $("#sub").on("click",function() {
 		overtime = 1;
     setTimeout(function() {                                  //防止AJAX传得过快导致同一题发送了两次
       ajax_start();                                          //有选项被选择时，单击确定按钮提交答案(AJAX)
-    },200)
+    },60)
   }
 })
 //判断对错
@@ -143,22 +186,25 @@ function timedown_start() {
 }
 //答题开始(已经在答题点)
 function answer_q(){
-	initialize_all();                                        //初始化
-  input_ques();                                            //根据从后台取得的题号q_num出题
 	$("#qabox").show();                                      //显示问答框架
-	timedown_start();                                       //倒计时开始
+	timedown_start();                                        //倒计时开始
 }
 //ajax返回后执行的函数
 function ajax_over() {
+	initialize_all();                                        //初始化
 	if (status == 'over') {                                  //游戏结束
-      achievement_show();                                    //显示成就页面
+      achievement_show();                                  //显示成就页面
 	}else {
-		input_ques();                                          //出题
+		  input_ques();                                        //出题（包括第一题）
 	}
-
 	if (status != 'start' && status != 'over') {             //并非第一题,并且游戏继续的情况下
     check_answer();                                        //判断对错
   }
+	if (status == 'start') {                                 //第一题情况下，延迟作答
+		setTimeout(function() {
+	    answer_q();
+		},40)
+	}
 }
 //初始化函数
 function initialize_all() {
@@ -177,17 +223,16 @@ $("#again_btn").on("click",function(){
 })
 //显示成就页面
 function achievement_show() {
-  if (score <= 4) {
-		console.log('幼儿园');
+  if (score <= 5) {
      $(".title").html('残念 只答对' + score + '题');
 		 $("#youeryuan").show();
-  }else if (score >= 5 && score <= 8) {
+  }else if (score >= 6 && score <= 9) {
 		$(".title").html('哈哈 答对了' + score + '题');
 		$("#xiaoxue").show();
-  }else if (score >= 9 && score <= 10) {
+  }else if (score >= 10 && score <= 12) {
 		$(".title").html('真棒！答对' + score + '题');
 		$("#zhongxue").show();
-  }else if (score >= 11) {
+  }else if (score >= 13) {
 		$("#daxue").show();
   }
 }
@@ -220,7 +265,8 @@ var tizai = {
 	top: 471,
 	left: 166,
 	width: 41,
-	height: 67
+	height: 67,
+	speed : 0.06
 }
 var bg = {
 	top: 0,
@@ -330,18 +376,18 @@ point[19] = {
 	type: 1
 }
 point[20] = {
+	top: 1700,
+	left: 2748,
+	type: 0
+}
+point[21] = {
 	top: 2000,
 	left: 2748,
 	type: 1
 }
-point[21] = {
-	top: 2000,
-	left: 2375,
-	type: 0
-}
 point[22] = {
 	top: 2000,
-	left: 2000,
+	left: 2200,
 	type: 0
 }
 point[23] = {
@@ -357,10 +403,25 @@ point[24] = {
 
 
 $(document).ready(function() {
+	loadImage('resource/one.gif', function(){              //调用图片预加载函数
+		console.log('图片已存在');
+	});
+	loadImage('resource/two.gif', function(){
+		console.log('图片已存在');
+	});
+	loadImage('resource/three.gif', function(){
+		console.log('图片已存在');
+	});
+	loadImage('resource/four.gif', function(){
+		console.log('图片已存在');
+	});
+	loadImage('resource/five.gif', function(){
+		console.log('图片已存在');
+	});
+
 	$(".startBtn").click(function() {                                     //开始按钮点击后（传一次ajax）
 		$(".rule").hide();                                                  //关闭开始提示
 		ajax_start();                                                       //通过AJAX取得题号
-		answer_q();                                                         //出第一题
 	});
 	$(".nextBtn").click(function() {                                      //继续按钮
 		$(".result").hide();
@@ -370,43 +431,49 @@ $(document).ready(function() {
 });
 
 function moveTo(desT, desL, type) {
-	if (e == 8 || e == 11 || e == 15 || e == 20) {
-		vertical(desT,type);
+	if (e == 8 || e == 11 || e == 15 || e == 20 || e == 21) {
+		var distance = (point[e].top - point[e-1].top) > 0 ? (point[e].top - point[e-1].top) : (point[e-1].top - point[e].top);
+		var time = Math.floor(distance/tizai.speed);
+		vertical(desT,type,time);
 	} else if (e == 5) {
 		jump(desT, desL,type);
 	} else {
-		horizontal(desL,type);
+		var distance = (point[e].left - point[e-1].left) > 0 ? (point[e].left - point[e-1].left) : (point[e-1].left - point[e].left);
+		var time = Math.floor(distance/tizai.speed);
+		horizontal(desL,type,time);
 	}
-	change(e);
 	setTimeout(function() {
 		if (type == 1) {
 			e++;
 			moveTo(point[e].top, point[e].left, point[e].type);
 		}
-	}, 5050);
+	}, time+50);
 }
 
-function horizontal(desL,type) { //梯仔水平运动动画函数
+function horizontal(desL,type,time) { //梯仔水平运动动画函数
 	var changeL = desL - tizai.left;
 	_bg.animate({
 		left: -changeL
-	}, 5000,function(){
+	}, time,function(){
+		change(e);
 		if(type == 0){
 			answer_q();
 		}
 	});
 }
 
-function vertical(desT,type) { //梯仔垂直运动动画函数
+function vertical(desT,type,time) { //梯仔垂直运动动画函数
 	var changeT = desT - tizai.top;
 	_bg.animate({
 		top: -changeT
-	}, 5000,function(){
+	}, time,function(){
+		change(e);
 		if(type == 0){
 			answer_q();
 		}
 	});
 }
+
 
 function jump(desT, desL,type) { //梯仔跳跃动画函数
 	var changeT = desT - tizai.top;
@@ -414,15 +481,20 @@ function jump(desT, desL,type) { //梯仔跳跃动画函数
 	_bg.animate({
 		top: -changeT,
 		left: -changeL
-	}, 2000);
+	}, 1000);
 	_tizai.animate({
 		top: '-=' + (point[5].top - point[4].top),
 		left: '-=' + (point[5].left - point[4].left)
-	}, 2000);
+	}, 1000,function(){
+		setTimeout(function(){
+			_tizai.html("<img src='./resource/three.gif'>");
+		},200);
+	});
 	_tizai.animate({
 		top: 471,
 		left: 166
-	}, 3000,function(){
+	}, 2000,function(){
+		change(e);
 		if(type == 0){
 			answer_q();
 		}
@@ -430,39 +502,42 @@ function jump(desT, desL,type) { //梯仔跳跃动画函数
 }
 
 function change(mode) { //改变梯仔gif的函数
-	if (mode == 5) {
-		setTimeout(function(){
-		_tizai.html("<img src='./resource/three.gif'>");
-		},2000);
-		setTimeout(function() {
+	if (mode == 5) {                                         //jump更换
 			_tizai.html("<img src='./resource/two.gif'>");
-		}, 4800);
 		setTimeout(function() {
 			_tizai.html("<img src='./resource/one.gif'>");
-		}, 5500);
+		}, 800);
 	}
-	if (mode == 8) {
+	if (mode == 7) {
 		_tizai.html("<img src='./resource/four.gif'>");
-		setTimeout(function() {
-			_tizai.html("<img src='./resource/one.gif'>");
-		}, 5000);
 	}
-	if (mode == 11) {
+	if(mode == 8) {
+		_tizai.html("<img src='./resource/one.gif'>");
+	}
+	if (mode == 10) {
 		_tizai.html("<img src='./resource/four.gif'>");
-		setTimeout(function() {
-			_tizai.html("<img src='./resource/five.gif'>");
-		}, 5000);
 	}
-	if (mode == 15) {
+	if(mode == 11){
+		_tizai.html("<img src='./resource/five.gif'>");
+	}
+	if (mode == 14) {
 		_tizai.html("<img src='./resource/four.gif'>");
-		setTimeout(function() {
-			_tizai.html("<img src='./resource/one.gif'>");
-		},5000);
 	}
-	if (mode == 20) {
+	if(mode == 15){
+		_tizai.html("<img src='./resource/one.gif'>");
+	}
+	if (mode == 19) {
 		_tizai.html("<img src='./resource/four.gif'>");
-		setTimeout(function() {
-			_tizai.html("<img src='./resource/five.gif'>");
-		},5000);
 	}
+	if(mode == 21){
+		_tizai.html("<img src='./resource/five.gif'>");
+	}
+}
+function loadImage(url, callback) {     //图片预加载
+    var img = new Image();
+    img.onload = function(){
+        img.onload = null;
+        callback(img);
+    }
+    img.src = url;
 }

@@ -7,7 +7,9 @@ if (strpos(addslashes($_SERVER['HTTP_USER_AGENT']), 'MicroMessenger') != false) 
 } else {
   // $this->error('请从微信端登录');
 }
-
+require "jssdk.php";
+$jssdk = new JSSDK("wxd25012bb1da2b4cf", "d4624c36b6795d1d99dcf0547af5443d");//appid 与 appesecret?
+$signPackage = $jssdk->GetSignPackage();
 ?>
 <!DOCTYPE html>
 
@@ -78,34 +80,34 @@ if (strpos(addslashes($_SERVER['HTTP_USER_AGENT']), 'MicroMessenger') != false) 
 	<div class="qes_and_ans popover" id="qabox">
 		<!-- 题目 -->
 		<div class="question">
-			<p id="question">学校里有那么多单杠，是因为</p>
+			<p id="question"></p>
 		</div>
 		    <!-- 选项A -->
 				<div class="choose" id="choose_a">
 					<div class="dot" id="dot_a"></div>
 					<div class="answer">
-						<p id="selection_a">让同学们强身健体,以便女生当男生用，男生当畜生用</p>
+						<p id="selection_a"></p>
 					</div>
 				</div>
 				<!-- 选项B -->
 				<div class="choose" id="choose_b">
 					<div class="dot" id="dot_b"></div>
 					<div class="answer">
-						<p id="selection_b">装饰校园<p/>
+						<p id="selection_b"><p/>
 					</div>
 				</div>
 				<!-- 选项C -->
 				<div class="choose" id="choose_c">
 					<div class="dot" id="dot_c"></div>
 					<div class="answer">
-						<p id="selection_c">男生体测要测引体向上<p/>
+						<p id="selection_c"><p/>
 					</div>
 				</div>
 				<!-- 选项D -->
 				<div class="choose" id="choose_d">
 					<div class="dot" id="dot_d"></div>
 					<div class="answer">
-						<p id="selection_d">男生要加强锻炼才能抱得起女朋友<p/>
+						<p id="selection_d"><p/>
 					</div>
 				</div>
 				<!-- 倒计时 -->
@@ -176,7 +178,120 @@ if (strpos(addslashes($_SERVER['HTTP_USER_AGENT']), 'MicroMessenger') != false) 
 	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="js/question.js"></script>
 	<script type="text/javascript" src="js/game.js"></script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"> </script>
+	wx.config
+	({
+		debug: false,//调试选true
+		appId: '<?php echo $signPackage["appId"];?>',
+		timestamp: <?php echo $signPackage["timestamp"];?>,
+		nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+		signature: '<?php echo $signPackage["signature"];?>',
+		jsApiList:[
+			'onMenuShareTimeline',
+			'onMenuShareAppMessage',
+			'onMenuShareQQ',
+			'onMenuShareWeibo',
+		]
+    });
 
+		wx.ready(function () {
+			document.querySelector('#onMenuShare').onclick = function () {
+				alert("赶快点击右上角...按钮来分享吧！");
+			};
+
+		//分享给朋友
+    wx.onMenuShareAppMessage({
+        title: '<?php echo $news['Title'];?>',
+        desc: '<?php echo $news['Description'];?>',
+        link: '<?php echo $news['Url'];?>',
+        imgUrl: '<?php echo $news['PicUrl'];?>',
+      trigger: function (res) {
+        //alert('用户点击发送给朋友');
+      },
+      success: function (res) {
+        //alert('已分享');
+      },
+      cancel: function (res) {
+        //alert('已取消');
+      },
+      fail: function (res) {
+        //alert(JSON.stringify(res));
+		alert('分享失败。。。');
+      }
+    });
+
+
+	//分享到朋友圈
+    wx.onMenuShareTimeline({
+      title: '<?php echo $news['Title'];?>',
+      link: '<?php echo $news['Url'];?>',
+      imgUrl: '<?php echo $news['PicUrl'];?>',
+      trigger: function (res) {
+        //alert('用户点击分享到朋友圈');
+      },
+      success: function (res) {
+        //alert('已分享');
+      },
+      cancel: function (res) {
+        //alert('已取消');
+      },
+      fail: function (res) {
+        //alert(JSON.stringify(res));
+		alert('分享失败。。。');
+      }
+    });
+
+	//分享到QQ
+    wx.onMenuShareQQ({
+      title: '<?php echo $news['Title'];?>',
+      desc: '<?php echo $news['Description'];?>',
+      link: '<?php echo $news['Url'];?>',
+      imgUrl: '<?php echo $news['PicUrl'];?>',
+      trigger: function (res) {
+        //alert('用户点击分享到QQ');
+      },
+      complete: function (res) {
+        //alert(JSON.stringify(res));
+      },
+      success: function (res) {
+        //alert('已分享');
+      },
+      cancel: function (res) {
+        //alert('已取消');
+      },
+      fail: function (res) {
+        //alert(JSON.stringify(res));
+		alert('分享失败。。。');
+      }
+    });
+  // “分享到微博”
+    wx.onMenuShareWeibo({
+      title: '<?php echo $news['Title'];?>',
+      desc: '<?php echo $news['Description'];?>',
+      link: '<?php echo $news['Url'];?>',
+      imgUrl: '<?php echo $news['PicUrl'];?>',
+      trigger: function (res) {
+        //alert('用户点击分享到微博');
+      },
+      complete: function (res) {
+        //alert(JSON.stringify(res));
+      },
+      success: function (res) {
+        //alert('已分享');
+      },
+      cancel: function (res) {
+        //alert('已取消');
+      },
+      fail: function (res) {
+        //alert(JSON.stringify(res));
+		alert('分享失败。。。');
+      }
+	});
+	//wx.error(function (res) {
+	//  alert(res.errMsg);
+	//});
+</script>
+<script src="http://demo.open.weixin.qq.com/jssdk/js/api-6.1.js?ts=1420774989"> </script>	
 
 </body>
 
