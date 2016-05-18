@@ -7,7 +7,6 @@
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -18,9 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
-
 -- Database: `game`
-
 --
 
 -- --------------------------------------------------------
@@ -35,8 +32,7 @@ CREATE TABLE IF NOT EXISTS `question_num` (
   `q_sql` int(11) NOT NULL COMMENT '已经出过的题号',
   PRIMARY KEY (`id`),
   KEY `wechat_id` (`wechat_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='为防止出重复题目所建' AUTO_INCREMENT=0;
-
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='为防止出重复题目所建' AUTO_INCREMENT=195 ;
 
 -- --------------------------------------------------------
 
@@ -54,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `step` (
   `time` timestamp NOT NULL,
   PRIMARY KEY (`id`),
   KEY `wechat_id` (`wechat_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -8,18 +8,20 @@ var timedown = 29;                    //倒计时显示时间(比总时间少1)
 var isanswer = false;                 //点击确定按钮提交后锁定计时器
 var td;                               //声明倒计时器
 var area = 'north';                   //南北校
-var news = [];                        //分享用
 //--------------------------------------------------------------//
 area = window.location.href.split('location=')[1];              //获取南北校标志
 //设置分享默认
-news['Title'] = '毕业之旅';
-news['Description'] = '本宝宝不服，机智如我竟然才华工幼儿园毕业？';
+var news = {
+	"Title" : "毕业之旅",
+	"Description" : "本宝宝不服，竟然才华工幼儿园毕业？戳链接来毕业",
+	"Url" : "",
+	"PicUrl" : "./resourse/youeryuan.png"
+};
 if (area == 'north') {
 	news['Url'] = 'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=north';
 }else {
 	news['Url'] = 'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=south';
 }
-news['PicUrl'] = 'resourse/youeryuan.png';
 
 //-------------------------------------------------------------//
 //     变量            前端             后台              处理
@@ -45,16 +47,16 @@ function update_share() {
 	}
 	if (score <= 5) {
 		news['Description'] = "本宝宝不服，机智如我竟然才华工幼儿园毕业？";
-		news['PicUrl'] = "resourse/youeryuan.png";
+		news['PicUrl'] = "./resourse/youeryuan.png";
   }else if (score >= 6 && score <= 9) {
 		news['Description'] = "读了十几年书居然才是华工小学生？不服！";
-		news['PicUrl'] = "resourse/xiaoxue.png";
+		news['PicUrl'] = "./resourse/xiaoxue.png";
   }else if (score >= 10 && score <= 12) {
 		news['Description'] = "学富五车的我还是嫩嫩的华工高中生！";
-		news['PicUrl'] = "resourse/zhongxue.png";
+		news['PicUrl'] = "./resourse/zhongxue.png";
   }else if (score >= 13) {
 		news['Description'] = "本宝宝可是名正言顺从华工毕业！";
-		news['PicUrl'] = "resourse/daxue.png";
+		news['PicUrl'] = "./resourse/daxue.png";
   }
 }
 
@@ -76,17 +78,6 @@ function ajax_start(){
 					update_share();//每次请求后更新分享内容
 			    ajax_over();   //ajax返回后的函数（纯前端）
 				},
-		// 下面是浩劫调试
-		// dataType: 'text',
-	    // success:function(data) {
-		// 	console.log(data);
-		// 	var jsondata = JSON.parse(data);
-		// 		  status  = jsondata.step;    //start表示游戏开始，over表示游戏结束，move表示继续前进，stay表示停留在原答题点再答一次
-		// 	 		q_num   = jsondata.question;//题目号(下一次的题号！！)
-		// 	 		score   = jsondata.score;//最终成绩，也是当前题目数
-		// 			update_share();//每次请求后更新分享内容
-		// 	    ajax_over();   //ajax返回后的函数（纯前端）
-		// 		},
 	    error:function(a,b,c){
 			console.log(a,b,c);
 	    	alert('发生错误！');
@@ -403,20 +394,15 @@ point[24] = {
 
 
 $(document).ready(function() {
-	loadImage('resource/one.gif', function(){              //调用图片预加载函数
-		console.log('图片已存在');
+	loadImage('./resource/one.gif', function(){              //调用图片预加载函数
 	});
-	loadImage('resource/two.gif', function(){
-		console.log('图片已存在');
+	loadImage('./resource/two.gif', function(){
 	});
-	loadImage('resource/three.gif', function(){
-		console.log('图片已存在');
+	loadImage('./resource/three.gif', function(){
 	});
-	loadImage('resource/four.gif', function(){
-		console.log('图片已存在');
+	loadImage('./resource/four.gif', function(){
 	});
-	loadImage('resource/five.gif', function(){
-		console.log('图片已存在');
+	loadImage('./resource/five.gif', function(){
 	});
 
 	$(".startBtn").click(function() {                                     //开始按钮点击后（传一次ajax）
