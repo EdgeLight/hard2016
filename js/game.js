@@ -79,7 +79,7 @@ function ajax_start(){
 		dataType: 'text',
 	    success:function(data) {
 			console.log(data);
-			var jsondata = eval(data);
+			var jsondata = JSON.parse(data);
 				  status  = jsondata.step;    //start表示游戏开始，over表示游戏结束，move表示继续前进，stay表示停留在原答题点再答一次
 			 		q_num   = jsondata.question;//题目号(下一次的题号！！)
 			 		score   = jsondata.score;//最终成绩，也是当前题目数
