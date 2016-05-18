@@ -229,7 +229,7 @@ session_start();
 			}
 			});
 			wx.onMenuShareAppMessage({
-				title: test,
+				title: 'test',
 				desc: news['Description'],
 				link: news['Url'],
 				imgUrl: news['PicUrl'],
