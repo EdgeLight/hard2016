@@ -1,6 +1,15 @@
 <?php
 header("Content-Type: text/html; charset=UTF-8");
 session_start();
+// $start_time = '1463760000'; // 开始时间5月21号00:00
+// $end_time = '1464623999'; // 结束时间5月30号23:59
+// if (time() >= $end_time) {
+//     echo "<script>alert(\"勇斩各路丧病考题\n你成功走完毕业之旅了吗？\n百步梯，创新只为与你分享\n我们明年再见\");</script>";
+//     exit();
+// } else if (time() <= $start_time) {
+//     echo "<script>alert(\"活动尚未开始，感谢您的关注\");</script>";
+//     exit();
+// }
 if (strpos(addslashes($_SERVER['HTTP_USER_AGENT']), 'MicroMessenger') != false) {
     if (empty($_GET['wechatId'])) {
         echo "<script>alert(\"系统出现错误\");</script>";
