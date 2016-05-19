@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `question_num` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `wechat_id` varchar(80) NOT NULL,
+  `wechat_id` varchar(40) NOT NULL,
   `q_sql` int(11) NOT NULL COMMENT '已经出过的题号',
   PRIMARY KEY (`id`),
   KEY `wechat_id` (`wechat_id`)
@@ -42,15 +42,14 @@ CREATE TABLE IF NOT EXISTS `question_num` (
 
 CREATE TABLE IF NOT EXISTS `step` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `wechat_id` varchar(80) NOT NULL,
+  `wechat_id` varchar(40) NOT NULL,
   `location` varchar(2) NOT NULL COMMENT '南校：s，北校：n',
   `q_num` int(4) NOT NULL,
   `chance` int(10) NOT NULL DEFAULT '2',
   `score` int(10) NOT NULL DEFAULT '0',
   `time` timestamp NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `wechat_id_2` (`wechat_id`),
-  KEY `wechat_id` (`wechat_id`)
+  UNIQUE KEY `wechat_id` (`wechat_id`),
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
