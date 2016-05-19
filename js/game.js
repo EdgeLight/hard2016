@@ -15,7 +15,7 @@ var news = {
 	"Title" : "毕业之旅",
 	"Description" : "本宝宝不服，竟然才华工幼儿园毕业？戳链接来毕业",
 	"Url" : "",
-	"PicUrl" : "resourse/youeryuan.png"
+	"PicUrl" : "resource/youeryuan.png"
 };
 if (area == 'north') {
 	news['Url'] = 'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=north';
@@ -47,16 +47,16 @@ function update_share() {
 	}
 	if (score <= 5) {
 		news['Description'] = "本宝宝不服，机智如我竟然才华工幼儿园毕业？";
-		news['PicUrl'] = "resourse/youeryuan.png";
+		news['PicUrl'] = "resource/youeryuan.png";
   }else if (score >= 6 && score <= 9) {
 		news['Description'] = "读了十几年书居然才是华工小学生？不服！";
-		news['PicUrl'] = "resourse/xiaoxue.png";
+		news['PicUrl'] = "resource/xiaoxue.png";
   }else if (score >= 10 && score <= 12) {
 		news['Description'] = "学富五车的我还是嫩嫩的华工高中生！";
-		news['PicUrl'] = "resourse/zhongxue.png";
+		news['PicUrl'] = "resource/zhongxue.png";
   }else if (score >= 13) {
 		news['Description'] = "本宝宝可是名正言顺从华工毕业！";
-		news['PicUrl'] = "resourse/daxue.png";
+		news['PicUrl'] = "resource/daxue.png";
   }
 		//分享给朋友
 		wx.onMenuShareAppMessage({
@@ -146,12 +146,14 @@ function input_ques(){
 $("#sub").on("click",function() {
   if (answer !='' && isanswer == false) {
     isanswer == true;
-    $("#qabox").hide();
+		setTimeout(function() {
+			$("#qabox").hide();
+		},280)
 		clearInterval(td);                                       //清除计时器
 		overtime = 1;
     setTimeout(function() {                                  //防止AJAX传得过快导致同一题发送了两次
       ajax_start();                                          //有选项被选择时，单击确定按钮提交答案(AJAX)
-    },60)
+    },800)
   }
 })
 //判断对错
@@ -247,9 +249,11 @@ function initialize_all() {
 }
 //原地再答一次
 $("#again_btn").on("click",function(){
-  $(".wrong").hide();
-  $("#qabox").show();
-	answer_q();
+	setTimeout(function() {
+		$(".wrong").hide();
+	  $("#qabox").show();
+		answer_q();
+	},280)
 })
 //显示成就页面
 function achievement_show() {
@@ -445,13 +449,19 @@ $(document).ready(function() {
 	});
 
 	$(".startBtn").click(function() {                                     //开始按钮点击后（传一次ajax）
-		$(".rule").hide();                                                  //关闭开始提示
-		ajax_start();                                                       //通过AJAX取得题号
+		setTimeout(function() {
+			$(".rule").hide();                                                //关闭开始提示
+		},280)
+		setTimeout(function() {
+			ajax_start();                                                     //通过AJAX取得题号
+		},120)
 	});
 	$(".nextBtn").click(function() {                                      //继续按钮
-		$(".result").hide();
-		e++;
-		moveTo(point[e].top, point[e].left, point[e].type);
+		setTimeout(function() {
+			$(".result").hide();
+			e++;
+			moveTo(point[e].top, point[e].left, point[e].type);
+		},260)
 	});
 });
 

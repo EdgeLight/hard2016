@@ -1,22 +1,22 @@
 <?php
 header("Content-Type: text/html; charset=UTF-8");
 session_start();
-// if (strpos(addslashes($_SERVER['HTTP_USER_AGENT']), 'MicroMessenger') != false) {
-//     if (empty($_GET['wechatId'])) {
-//         echo "<script>alert(\"系统出现错误\");</script>";
-//         exit();
-//     }
-//     $_SESSION['wechat_id'] = $_GET['wechatId'];
-//     $_SESSION['location'] = $_GET['location'];
-// } else {
-//     echo "<script>alert(\"请从微信端登录\");</script>";
-//     exit();
-// }
-// require "jssdk.php";
-// $jssdk = new JSSDK("wx72dcc0c8ae1265f9", "ec008dac2e11c2b893366ca77bb7b4d0");
-// // $jssdk = new JSSDK("wxd25012bb1da2b4cf", "d4624c36b6795d1d99dcf0547af5443d");
-// $signPackage = $jssdk->GetSignPackage();
-//
+if (strpos(addslashes($_SERVER['HTTP_USER_AGENT']), 'MicroMessenger') != false) {
+    if (empty($_GET['wechatId'])) {
+        echo "<script>alert(\"系统出现错误\");</script>";
+        exit();
+    }
+    $_SESSION['wechat_id'] = $_GET['wechatId'];
+    $_SESSION['location'] = $_GET['location'];
+} else {
+    echo "<script>alert(\"请从微信端登录\");</script>";
+    exit();
+}
+require "jssdk.php";
+$jssdk = new JSSDK("wx72dcc0c8ae1265f9", "ec008dac2e11c2b893366ca77bb7b4d0");
+// $jssdk = new JSSDK("wxd25012bb1da2b4cf", "d4624c36b6795d1d99dcf0547af5443d");
+$signPackage = $jssdk->GetSignPackage();
+
 ?>
 <!DOCTYPE html>
 
@@ -24,6 +24,7 @@ session_start();
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="style/jquery.rippleria.min.css">
 	<link rel="stylesheet" type="text/css" href="style/style.css">
 	<title>毕业之旅</title>
 </head>
@@ -87,7 +88,7 @@ session_start();
 			<div class="btn-replace"></div>
 		</div>
 		<!-- 开始按钮 -->
-		<div class="button startBtn" data-name="游戏开始"><p>游戏开始</p></div>
+		<div class="button startBtn" data-rippleria><p>游戏开始</p></div>
 	</div>
 	<!-- 答题框架 -->
 	<div class="qes_and_ans popover" id="qabox">
@@ -127,20 +128,20 @@ session_start();
 				<div class="replace"></div>
 				<!-- 倒计时 -->
 				<div class="count" id="timedown">30s</div>
-				<div class="button" id="sub"><p>确定</p></div>
+				<div class="button" id="sub" data-rippleria><p>确定</p></div>
 	</div>
 	<!-- 对/错反馈 -->
 	<div class="right result popover">
 		<div class="info">
 			<p>&nbsp;&nbsp;答对啦！<br>恭喜你<br>离毕业又近了一步!</p>
 		</div>
-		<div class="button nextBtn">继续</div>
+		<div class="button nextBtn" data-rippleria>继续</div>
 	</div>
 	<div class="wrong result popover">
 		<div class="info">
 			<p>这次没有答对哦<br>请重新作答</p>
 		</div>
-		<div class="button" id="again_btn"><p>再来一次</p></div>
+		<div class="button" id="again_btn" data-rippleria><p>再来一次</p></div>
 	</div>
 
 	<!-- 成就页面 -->
@@ -191,12 +192,13 @@ session_start();
 	</div>
 
 	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="js/jquery.rippleria.min.js"></script>
 	<script type="text/javascript" src="js/question.js"></script>
 	<script type="text/javascript" src="js/game.js"></script>
 	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 	<script type="text/javascript">
 	wx.config({
-		debug:true,//调试选true
+		debug:false,//调试选true
 		appId: '<?php echo $signPackage["appId"]; ?>',
 		timestamp: '<?php echo $signPackage["timestamp"]; ?>',
 		nonceStr: '<?php echo $signPackage["nonceStr"]; ?>',
@@ -208,7 +210,7 @@ session_start();
     });
 
 		wx.ready(function () {
-				//分享给朋友
+			//分享给朋友
 			wx.onMenuShareAppMessage({
 				title: news['Title'],
 				desc: news['Description'],
@@ -248,14 +250,7 @@ session_start();
 				}
 			});
 		});
-
-
-
-
-	//wx.error(function (res) {
-	//  alert(res.errMsg);
-	//});
-</script>
+</script> -->
 
 
 </body>
