@@ -1,22 +1,22 @@
 <?php
 header("Content-Type: text/html; charset=UTF-8");
 session_start();
-// if (strpos(addslashes($_SERVER['HTTP_USER_AGENT']), 'MicroMessenger') != false) {
-//     if (empty($_GET['wechatId'])) {
-//         echo "<script>alert(\"系统出现错误\");</script>";
-//         exit();
-//     }
-//     $_SESSION['wechat_id'] = $_GET['wechatId'];
-//     $_SESSION['location'] = $_GET['location'];
-// } else {
-//     echo "<script>alert(\"请从微信端登录\");</script>";
-//     exit();
-// }
-// require "jssdk.php";
-// $jssdk = new JSSDK("wx72dcc0c8ae1265f9", "ec008dac2e11c2b893366ca77bb7b4d0");
-// // $jssdk = new JSSDK("wxd25012bb1da2b4cf", "d4624c36b6795d1d99dcf0547af5443d");
-// $signPackage = $jssdk->GetSignPackage();
-//
+if (strpos(addslashes($_SERVER['HTTP_USER_AGENT']), 'MicroMessenger') != false) {
+    if (empty($_GET['wechatId'])) {
+        echo "<script>alert(\"系统出现错误\");</script>";
+        exit();
+    }
+    $_SESSION['wechat_id'] = $_GET['wechatId'];
+    $_SESSION['location'] = $_GET['location'];
+} else {
+    echo "<script>alert(\"请从微信端登录\");</script>";
+    exit();
+}
+require "jssdk.php";
+$jssdk = new JSSDK("wx72dcc0c8ae1265f9", "ec008dac2e11c2b893366ca77bb7b4d0");
+// $jssdk = new JSSDK("wxd25012bb1da2b4cf", "d4624c36b6795d1d99dcf0547af5443d");
+$signPackage = $jssdk->GetSignPackage();
+
 ?>
 <!DOCTYPE html>
 
@@ -196,7 +196,7 @@ session_start();
 	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 	<script type="text/javascript">
 	wx.config({
-		debug:true,//调试选true
+		debug:false,//调试选true
 		appId: '<?php echo $signPackage["appId"]; ?>',
 		timestamp: '<?php echo $signPackage["timestamp"]; ?>',
 		nonceStr: '<?php echo $signPackage["nonceStr"]; ?>',
