@@ -160,7 +160,7 @@ $signPackage = $jssdk->GetSignPackage();
 			<p>&nbsp;恭喜你成功从华工毕业<br>&nbsp;即将走上人生巅峰！</p>
 			<p>【再次答题可体验不同题目】</p>
 		</div>
-		<div class="button restartBtn" data-rippleria>重新开始</div>
+		<div class="button restartBtn" data-rippleria><p>重新开始</p></div>
 		<div class="pic_replace"></div>
 		<div class="picture">
 			<img class="daxue" src="resource/大学.png">
@@ -173,7 +173,7 @@ $signPackage = $jssdk->GetSignPackage();
 			<p>&nbsp;达到华工附中毕业水平<br>&nbsp;重修一次说不定能拿到<br>&nbsp;华工毕业证哦！</p>
 			<p>【再次答题可体验不同题目】</p>
 		</div>
-		<div class="button restartBtn" data-rippleria>重新开始</div>
+		<div class="button restartBtn" data-rippleria><p>重新开始</p></div>
 		<div class="pic_replace"></div>
 		<div class="picture">
 			<img src="resource/附中.png">
@@ -188,7 +188,7 @@ $signPackage = $jssdk->GetSignPackage();
 			<p>&nbsp;too young哟</p>
 			<p>【再次答题可体验不同题目】</p>
 		</div>
-		<div class="button restartBtn" data-rippleria>重新开始</div>
+		<div class="button restartBtn" data-rippleria><p>重新开始</p></div>
 		<div class="pic_replace"></div>
 		<div class="picture">
 			<img src="resource/小学.png">
@@ -201,7 +201,7 @@ $signPackage = $jssdk->GetSignPackage();
 			<p>&nbsp;达到华工幼儿园毕业水平<br>。。。拿到华工毕业证基本无望</p>
 			<p>【再次答题可体验不同题目】</p>
 		</div>
-		<div class="button restartBtn" data-rippleria>重新开始</div>
+		<div class="button restartBtn" data-rippleria><p>重新开始</p></div>
 		<div class="pic_replace"></div>
 		<div class="picture">
 			<img src="resource/幼儿园.png">
