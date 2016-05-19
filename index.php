@@ -66,7 +66,7 @@ $signPackage = $jssdk->GetSignPackage();
   	</div>
 	<!-- 梯仔 -->
 	<div id="tizai">
-		<img src="resource/one.gif">
+		<img id="tizai_img" src="./resource/one.gif">
 	</div>
   <!-- 开始 游戏规则页面 -->
 	<div class="rule popover">
@@ -235,6 +235,7 @@ $signPackage = $jssdk->GetSignPackage();
 				title: news['Title'],
 				link: news['Url'],
 				imgUrl: news['PicUrl'],
+        desc: news['Description'],
 				trigger: function (res) {
 					//alert('用户点击分享到朋友圈');
 				},

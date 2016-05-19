@@ -13,7 +13,7 @@ area = window.location.href.split('location=')[1];              //获取南北�
 //设置分享默认
 var news = {
 	"Title" : "毕业之旅",
-	"Description" : "本宝宝不服，竟然才华工幼儿园毕业？戳链接来毕业",
+	"Description" : "本宝宝不服，机智如我竟然才华工幼儿园毕业？",
 	"Url" : "",
 	"PicUrl" : "http://graduation.100steps.net/hard2016/resource/youeryuan.png"
 };
@@ -291,7 +291,7 @@ change()     改变梯仔gif
 每次到达答题点运行动画的回调函数answer()
 点击类名为startBtn的按钮前往下一个答题点*/
 
-var _tizai = $("#tizai");
+var _tizai = $("#tizai_img");
 var _bg = $("#bg");
 var point = []; //每次运动目的地坐标（并不是答题点）
 
@@ -517,12 +517,12 @@ function jump(desT, desL,type) { //梯仔跳跃动画函数
 		top: -changeT,
 		left: -changeL
 	}, 1000);
-	_tizai.animate({
+	 .animate({
 		top: '-=' + (point[5].top - point[4].top),
 		left: '-=' + (point[5].left - point[4].left)
 	}, 1000,function(){
 		setTimeout(function(){
-			_tizai.html("<img src='./resource/three.gif'>");
+			_tizai.css('src','./resource/three.gif');
 		},200);
 	});
 	_tizai.animate({
@@ -538,34 +538,34 @@ function jump(desT, desL,type) { //梯仔跳跃动画函数
 
 function change(mode) { //改变梯仔gif的函数
 	if (mode == 5) {                                         //jump更换
-			_tizai.html("<img src='./resource/two.gif'>");
+		_tizai.css('src','./resource/two.gif');
 		setTimeout(function() {
-			_tizai.html("<img src='./resource/one.gif'>");
+			_tizai.css('src','./resource/one.gif');
 		}, 800);
 	}
 	if (mode == 7) {
-		_tizai.html("<img src='./resource/four.gif'>");
+		_tizai.css('src','./resource/four.gif');
 	}
 	if(mode == 8) {
-		_tizai.html("<img src='./resource/one.gif'>");
+		_tizai.css('src','./resource/one.gif');
 	}
 	if (mode == 10) {
-		_tizai.html("<img src='./resource/four.gif'>");
+		_tizai.css('src','./resource/four.gif');
 	}
 	if(mode == 11){
-		_tizai.html("<img src='./resource/five.gif'>");
+		_tizai.css('src','./resource/five.gif');
 	}
 	if (mode == 14) {
-		_tizai.html("<img src='./resource/four.gif'>");
+		_tizai.css('src','./resource/four.gif');
 	}
 	if(mode == 15){
-		_tizai.html("<img src='./resource/one.gif'>");
+		_tizai.css('src','./resource/one.gif');
 	}
 	if (mode == 19) {
-		_tizai.html("<img src='./resource/four.gif'>");
+		_tizai.css('src','./resource/four.gif');
 	}
 	if(mode == 21){
-		_tizai.html("<img src='./resource/five.gif'>");
+		_tizai.css('src','./resource/five.gif');
 	}
 }
 function loadImage(url, callback) {     //图片预加载
