@@ -249,10 +249,9 @@ $signPackage = $jssdk->GetSignPackage();
 			});
 			//分享到朋友圈
 			wx.onMenuShareTimeline({
-				title: news['Title'],
+				title: news['Description'],
 				link: news['Url'],
 				imgUrl: news['PicUrl'],
-        desc: news['Description'],
 				trigger: function (res) {
 					//alert('用户点击分享到朋友圈');
 				},
