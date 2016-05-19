@@ -83,6 +83,7 @@ function update_share() {
 			title: news['Title'],
 			link: news['Url'],
 			imgUrl: news['PicUrl'],
+			desc: news['Description'],
 			trigger: function (res) {
 				//alert('用户点击分享到朋友圈');
 			},
@@ -291,7 +292,7 @@ change()     改变梯仔gif
 每次到达答题点运行动画的回调函数answer()
 点击类名为startBtn的按钮前往下一个答题点*/
 
-var _tizai = $("#tizai_img");
+var _tizai = $("#tizai");
 var _bg = $("#bg");
 var point = []; //每次运动目的地坐标（并不是答题点）
 
@@ -463,6 +464,15 @@ $(document).ready(function() {
 			moveTo(point[e].top, point[e].left, point[e].type);
 		},260)
 	});
+	$(".restartBtn").click(function() {                                   //再来一次按钮
+		setTimeout(function() {
+			if (area == 'north') {
+				location.replace('http://graduation.100steps.net/alumni2016/index.php/Index/game?location=north');
+			}else {
+				location.replace('http://graduation.100steps.net/alumni2016/index.php/Index/game?location=south');
+			}
+		},280)
+	})
 });
 
 function moveTo(desT, desL, type) {
@@ -517,12 +527,12 @@ function jump(desT, desL,type) { //梯仔跳跃动画函数
 		top: -changeT,
 		left: -changeL
 	}, 1000);
-	 .animate({
+	_tizai.animate({
 		top: '-=' + (point[5].top - point[4].top),
 		left: '-=' + (point[5].left - point[4].left)
 	}, 1000,function(){
 		setTimeout(function(){
-			_tizai.css('src','./resource/three.gif');
+			_tizai.html("<img src='./resource/three.gif'>");
 		},200);
 	});
 	_tizai.animate({
@@ -538,34 +548,34 @@ function jump(desT, desL,type) { //梯仔跳跃动画函数
 
 function change(mode) { //改变梯仔gif的函数
 	if (mode == 5) {                                         //jump更换
-		_tizai.css('src','./resource/two.gif');
-		setTimeout(function() {
-			_tizai.css('src','./resource/one.gif');
-		}, 800);
-	}
+		_tizai.html("<img src='./resource/two.gif'>");
+			setTimeout(function() {
+				_tizai.html("<img src='./resource/one.gif'>");
+			}, 800);
+		}
 	if (mode == 7) {
-		_tizai.css('src','./resource/four.gif');
+		_tizai.html("<img src='./resource/four.gif'>");
 	}
 	if(mode == 8) {
-		_tizai.css('src','./resource/one.gif');
+		_tizai.html("<img src='./resource/one.gif'>");
 	}
 	if (mode == 10) {
-		_tizai.css('src','./resource/four.gif');
+		_tizai.html("<img src='./resource/four.gif'>");
 	}
 	if(mode == 11){
-		_tizai.css('src','./resource/five.gif');
+		_tizai.html("<img src='./resource/five.gif'>");
 	}
 	if (mode == 14) {
-		_tizai.css('src','./resource/four.gif');
+		_tizai.html("<img src='./resource/four.gif'>");
 	}
 	if(mode == 15){
-		_tizai.css('src','./resource/one.gif');
+		_tizai.html("<img src='./resource/one.gif'>");
 	}
 	if (mode == 19) {
-		_tizai.css('src','./resource/four.gif');
+		_tizai.html("<img src='./resource/four.gif'>");
 	}
 	if(mode == 21){
-		_tizai.css('src','./resource/five.gif');
+		_tizai.html("<img src='./resource/five.gif'>");
 	}
 }
 function loadImage(url, callback) {     //图片预加载
