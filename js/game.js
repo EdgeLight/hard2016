@@ -300,7 +300,7 @@ var tizai = {
 	left: 166,
 	width: 41,
 	height: 67,
-	speed : 0.08
+	speed : 0.07    //梯仔的速度
 }
 var bg = {
 	top: 0,
@@ -567,14 +567,6 @@ function change(mode) { //改变梯仔gif的函数
 	if(mode == 21){
 		_tizai.css('src','./resource/five.gif');
 	}
-}
-function loadImage(url, callback) {     //图片预加载
-    var img = new Image();
-    img.onload = function(){
-        img.onload = null;
-        callback(img);
-    }
-    img.src = url;
 }
 function loadImage(url, callback) {     //图片预加载
     var img = new Image();
