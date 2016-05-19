@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2016-05-18 13:12:28
+-- Generation Time: 2016-05-19 12:56:07
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `question_num` (
   `q_sql` int(11) NOT NULL COMMENT '已经出过的题号',
   PRIMARY KEY (`id`),
   KEY `wechat_id` (`wechat_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='为防止出重复题目所建' AUTO_INCREMENT=195 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='为防止出重复题目所建' AUTO_INCREMENT=0 ;
 
 -- --------------------------------------------------------
 
@@ -49,8 +49,9 @@ CREATE TABLE IF NOT EXISTS `step` (
   `score` int(10) NOT NULL DEFAULT '0',
   `time` timestamp NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `wechat_id_2` (`wechat_id`),
   KEY `wechat_id` (`wechat_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

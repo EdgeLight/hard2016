@@ -81,7 +81,7 @@ $signPackage = $jssdk->GetSignPackage();
 				从华工毕业！！<br>
 				(提示：游戏共有16个关卡，<br>
 				而毕业路上的你只有三次<br>
-				答题机会，每题只有30秒<br>
+				答错机会，每题只有30秒<br>
 				思考时间，沿途欣赏美景的<br>
 				时候别忘了认真思考哦！)<br>
 			</p>
@@ -251,7 +251,7 @@ $signPackage = $jssdk->GetSignPackage();
 				}
 			});
 		});
-</script> -->
+</script>
 
 
 </body>
