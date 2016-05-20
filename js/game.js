@@ -38,6 +38,33 @@ if (area == 'north') {
 // 题号               question       game['question']    JSON
 // 状态码             status         game['step']        JSON
 //------------------------------------------------------------//
+//打乱class
+function randomizeContent(classname){
+	var contents=randomizeContent.collectElementbyClass(classname);
+	contents.text.sort(function() {return 0.5 - Math.random();});
+	var tbodyref=contents.ref[0].tagName=="TR"? contents.ref[0].parentNode : new Object();
+	for (var i=0; i<contents.ref.length; i++){
+		if (tbodyref.moveRow) //if IE
+			tbodyref.moveRow(0, Math.round(Math.random()*(tbodyref.rows.length-1)));
+		else
+			contents.ref[i].innerHTML=contents.text[i];
+		contents.ref[i].style.visibility="visible";
+	}
+}
+randomizeContent.collectElementbyClass=function(classname){ //return two arrays containing elements with specified classname, plus their innerHTML content
+	var classnameRE=new RegExp("(^|\\s+)"+classname+"($|\\s+)", "i"); //regular e­xpression to screen for classname within element
+	var contentobj=new Object();
+	contentobj.ref=new Array(); //array containing references to the participating contents
+	contentobj.text=new Array(); //array containing participating contents' contents (innerHTML property)
+	var alltags=document.all? document.all : document.getElementsByTagName("*");
+	for (var i=0; i<alltags.length; i++){
+		if (typeof alltags[i].className=="string" && alltags[i].className.search(classnameRE)!=-1){
+			contentobj.ref[contentobj.ref.length]=alltags[i];
+			contentobj.text[contentobj.text.length]=alltags[i].innerHTML;
+		}
+	}
+	return contentobj;
+}
 //分享内容更新
 function update_share() {
 	if (area == 'north') {
@@ -140,7 +167,7 @@ function input_ques(){
 		$("#selection_c").html(c_n[q_num]);
 		$("#selection_d").html(d_n[q_num]);
 	}
-
+  randomizeContent("choose");                                //打乱选项顺序
 }
 //注册确定按钮
 $("#sub").on("click",function() {
@@ -452,7 +479,7 @@ $(document).ready(function() {
 });
 
 function moveTo(type) {
-	
+
 	if(e == 5){
 		jump(point[e].type);         //跳
 	}else{
@@ -466,7 +493,7 @@ function moveTo(type) {
 		}
 		walk(point[e].type,time);     //走
 	}
-	
+
 	setTimeout(function() {
 		if (type == 1) {
 			e++;
@@ -476,7 +503,7 @@ function moveTo(type) {
 }
 
 function walk(type,time) { //梯仔水平运动动画函数
-	
+
 	var an_num = "bgMove"+e;
 	var duration = time+"ms";
 	_bg.css("-webkit-animation-name",an_num);
@@ -497,22 +524,22 @@ function jump(type) { //梯仔跳跃动画函数
 	_bg.css("-webkit-animation-duration","1s");
 	_bg.css("-webkit-animation-fill-mode","both");
 	_bg.css("-webkit-animation-timing-function","linear");
-	
+
 	_tizai.css("-webkit-animation-name","tizaiMove5-1");
 	_tizai.css("-webkit-animation-duration","1s");
 	_tizai.css("-webkit-animation-fill-mode","both");
 	_tizai.css("-webkit-animation-timing-function","linear");
-	
+
 	setTimeout(function(){
 		_tizai.html("<img src='./resource/three.gif'>");
 	},1050);
-	
-	_tizai.on("webkitAnimationEnd", function(){ //动画结束时事件 
+
+	_tizai.on("webkitAnimationEnd", function(){ //动画结束时事件
 		_tizai.css("-webkit-animation-name","tizaiMove5-2");
 		_tizai.css("-webkit-animation-duration","1.5s");
 		_tizai.css("-webkit-animation-fill-mode","both");
 		_tizai.css("-webkit-animation-timing-function","ease-in");
-	}); 
+	});
 
 	setTimeout(function(){
 		change(e);
