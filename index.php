@@ -114,6 +114,7 @@ $signPackage = $jssdk->GetSignPackage();
 		<div class="question">
 			<p id="question"></p>
 		</div>
+    <div id="choose">
 		    <!-- 选项A -->
 				<div class="choose" id="choose_a">
 					<div class="dot" id="dot_a"></div>
@@ -142,6 +143,7 @@ $signPackage = $jssdk->GetSignPackage();
 						<p id="selection_d"><p/>
 					</div>
 				</div>
+    </div>
 				<!-- 计时器和按钮占位框 -->
 				<div class="replace"></div>
 				<!-- 倒计时 -->

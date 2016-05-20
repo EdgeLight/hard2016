@@ -41,7 +41,7 @@ if($answer == 'start')
 		$q_num = mt_rand(0,84);		//共85道
 	}else
 	{
-		$q_num = mt_rand(0,136);	//共137道
+		$q_num = mt_rand(0,135);	//共136道
 	}
 
 	$rs = $db -> prepare("select id from step where wechat_id = ?");
@@ -175,7 +175,7 @@ if($answer == 'start')
 			$numbers = range(0,84);
 		}else
 		{
-			$numbers = range(0,136);
+			$numbers = range(0,135);
 		}
 
 		$num = array_diff($numbers,$q_num);

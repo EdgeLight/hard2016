@@ -38,33 +38,6 @@ if (area == 'north') {
 // 题号               question       game['question']    JSON
 // 状态码             status         game['step']        JSON
 //------------------------------------------------------------//
-//打乱class
-function randomizeContent(classname){
-	var contents=randomizeContent.collectElementbyClass(classname);
-	contents.text.sort(function() {return 0.5 - Math.random();});
-	var tbodyref=contents.ref[0].tagName=="TR"? contents.ref[0].parentNode : new Object();
-	for (var i=0; i<contents.ref.length; i++){
-		if (tbodyref.moveRow) //if IE
-			tbodyref.moveRow(0, Math.round(Math.random()*(tbodyref.rows.length-1)));
-		else
-			contents.ref[i].innerHTML=contents.text[i];
-		contents.ref[i].style.visibility="visible";
-	}
-}
-randomizeContent.collectElementbyClass=function(classname){ //return two arrays containing elements with specified classname, plus their innerHTML content
-	var classnameRE=new RegExp("(^|\\s+)"+classname+"($|\\s+)", "i"); //regular e­xpression to screen for classname within element
-	var contentobj=new Object();
-	contentobj.ref=new Array(); //array containing references to the participating contents
-	contentobj.text=new Array(); //array containing participating contents' contents (innerHTML property)
-	var alltags=document.all? document.all : document.getElementsByTagName("*");
-	for (var i=0; i<alltags.length; i++){
-		if (typeof alltags[i].className=="string" && alltags[i].className.search(classnameRE)!=-1){
-			contentobj.ref[contentobj.ref.length]=alltags[i];
-			contentobj.text[contentobj.text.length]=alltags[i].innerHTML;
-		}
-	}
-	return contentobj;
-}
 //分享内容更新
 function update_share() {
 	if (area == 'north') {
@@ -152,6 +125,7 @@ function ajax_start(){
 }
 //出题
 function input_ques(){
+	sort();
 	//南校题库
 	if (area == 'south') {
 		$("#question").html(question_s[q_num]);
@@ -167,7 +141,6 @@ function input_ques(){
 		$("#selection_c").html(c_n[q_num]);
 		$("#selection_d").html(d_n[q_num]);
 	}
-  randomizeContent("choose");                                //打乱选项顺序
 }
 //注册确定按钮
 $("#sub").on("click",function() {
@@ -297,6 +270,15 @@ function achievement_show() {
 		$("#daxue").show();
   }
 }
+//打乱选项
+function sort(){
+	var arr=$('.choose');
+    arr.sort(function(){ return 0.5 - Math.random() });
+    for (var i = 0; i < arr.length; i++) {
+    	$("#choose").append(arr[i]);
+    }
+}
+
 //-----------------------------------------------------------------//
 //动画部分
 
