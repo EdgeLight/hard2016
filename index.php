@@ -11,7 +11,7 @@ session_start();
 //     exit();
 // }
 if (strpos(addslashes($_SERVER['HTTP_USER_AGENT']), 'MicroMessenger') != false) {
-    if (empty($_GET['wechatId'])) {
+    if (empty($_GET['wechatId']) || empty($_GET['location'])) {
         echo "<script>alert(\"系统出现错误\");</script>";
         exit();
     }
