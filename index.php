@@ -209,7 +209,7 @@ $signPackage = $jssdk->GetSignPackage();
 	<div class="achievement popover" id="youeryuan">
 		<div class="text">
 			<p class="title">残念 只答对X题</p>
-			<p>&nbsp;达到华工幼儿园毕业水平<br>。。。拿到华工毕业证基本无望</p>
+			<p>&nbsp;达到华工幼儿园毕业水平.&nbsp;.&nbsp;.<br>&nbsp;拿到华工毕业证基本无望</p>
 			<p>【再次答题可体验不同题目】</p>
 		</div>
 		<div class="button restartBtn" data-rippleria><p>重新开始</p></div>
