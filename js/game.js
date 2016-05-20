@@ -271,25 +271,9 @@ function achievement_show() {
   }
 }
 //-----------------------------------------------------------------//
-/***********最新************
-*******change()函数挂了*****/
+//动画部分
 
-var W = document.body.clientWidth;
-var H = document.body.clientHeight;
-
-//tizai状态码
-var moving = false;
-var arrive = false;
-var answering;
 var e = 0;
-
-/*moveTo函数下有四个子函数：
-horizontal() 控制梯仔水平运动
-vertical()   控制梯仔垂直运动
-jump()       梯仔从南校跳到北校
-change()     改变梯仔gif
-每次到达答题点运行动画的回调函数answer()
-点击类名为startBtn的按钮前往下一个答题点*/
 
 var _tizai = $("#tizai");
 var _bg = $("#bg");
@@ -298,15 +282,8 @@ var point = []; //每次运动目的地坐标（并不是答题点）
 var tizai = {
 	top: 471,
 	left: 166,
-	width: 41,
-	height: 67,
-	speed : 0.07    //梯仔的速度
+	speed : 0.08    //梯仔的速度
 }
-var bg = {
-	top: 0,
-	left: 0
-}
-
 
 // type = 0则该点为答题点
 point[0] = {
@@ -365,7 +342,7 @@ point[10] = {
 	type: 1
 }
 point[11] = {
-	top: 1099,
+	top: 1100,
 	left: 2528,
 	type: 1
 }
@@ -460,7 +437,7 @@ $(document).ready(function() {
 		setTimeout(function() {
 			$(".result").hide();
 			e++;
-			moveTo(point[e].top, point[e].left, point[e].type);
+			moveTo( point[e].type );
 		},260)
 	});
 	$(".restartBtn").click(function() {                                   //再来一次按钮
@@ -474,75 +451,75 @@ $(document).ready(function() {
 	})
 });
 
-function moveTo(desT, desL, type) {
-	if (e == 8 || e == 11 || e == 15 || e == 20 || e == 21) {
-		var distance = (point[e].top - point[e-1].top) > 0 ? (point[e].top - point[e-1].top) : (point[e-1].top - point[e].top);
-		var time = Math.floor(distance/tizai.speed);
-		vertical(desT,type,time);
-	} else if (e == 5) {
-		jump(desT, desL,type);
-	} else {
-		var distance = (point[e].left - point[e-1].left) > 0 ? (point[e].left - point[e-1].left) : (point[e-1].left - point[e].left);
-		var time = Math.floor(distance/tizai.speed);
-		horizontal(desL,type,time);
+function moveTo(type) {
+	
+	if(e == 5){
+		jump(point[e].type);         //跳
+	}else{
+		//计算运动时间
+		if (e == 8 || e == 11 || e == 15 || e == 20 || e == 21) {
+			var distance = (point[e].top - point[e-1].top) > 0 ? (point[e].top - point[e-1].top) : (point[e-1].top - point[e].top);
+			var time = Math.floor(distance/tizai.speed);
+		}else{
+			var distance = (point[e].left - point[e-1].left) > 0 ? (point[e].left - point[e-1].left) : (point[e-1].left - point[e].left);
+			var time = Math.floor(distance/tizai.speed);
+		}
+		walk(point[e].type,time);     //走
 	}
+	
 	setTimeout(function() {
 		if (type == 1) {
 			e++;
-			moveTo(point[e].top, point[e].left, point[e].type);
+			moveTo(point[e].type);
 		}
 	}, time+50);
 }
 
-function horizontal(desL,type,time) { //梯仔水平运动动画函数
-	var changeL = desL - tizai.left;
-	_bg.animate({
-		left: -changeL
-	}, time,function(){
+function walk(type,time) { //梯仔水平运动动画函数
+	
+	var an_num = "bgMove"+e;
+	var duration = time+"ms";
+	_bg.css("-webkit-animation-name",an_num);
+	_bg.css("-webkit-animation-duration",duration);
+	_bg.css("-webkit-animation-fill-mode","both");
+	_bg.css("-webkit-animation-timing-function","linear");
+	setTimeout(function(){
 		change(e);
 		if(type == 0){
 			answer_q();
 		}
-	});
+	},time+50);
 }
 
-function vertical(desT,type,time) { //梯仔垂直运动动画函数
-	var changeT = desT - tizai.top;
-	_bg.animate({
-		top: -changeT
-	}, time,function(){
+function jump(type) { //梯仔跳跃动画函数
+
+	_bg.css("-webkit-animation-name","bgMove5");
+	_bg.css("-webkit-animation-duration","1s");
+	_bg.css("-webkit-animation-fill-mode","both");
+	_bg.css("-webkit-animation-timing-function","linear");
+	
+	_tizai.css("-webkit-animation-name","tizaiMove5-1");
+	_tizai.css("-webkit-animation-duration","1s");
+	_tizai.css("-webkit-animation-fill-mode","both");
+	_tizai.css("-webkit-animation-timing-function","linear");
+	
+	setTimeout(function(){
+		_tizai.html("<img src='./resource/three.gif'>");
+	},1050);
+	
+	_tizai.on("webkitAnimationEnd", function(){ //动画结束时事件 
+		_tizai.css("-webkit-animation-name","tizaiMove5-2");
+		_tizai.css("-webkit-animation-duration","1.5s");
+		_tizai.css("-webkit-animation-fill-mode","both");
+		_tizai.css("-webkit-animation-timing-function","ease-in");
+	}); 
+
+	setTimeout(function(){
 		change(e);
 		if(type == 0){
 			answer_q();
 		}
-	});
-}
-
-
-function jump(desT, desL,type) { //梯仔跳跃动画函数
-	var changeT = desT - tizai.top;
-	var changeL = desL - tizai.left;
-	_bg.animate({
-		top: -changeT,
-		left: -changeL
-	}, 1000);
-	_tizai.animate({
-		top: '-=' + (point[5].top - point[4].top),
-		left: '-=' + (point[5].left - point[4].left)
-	}, 1000,function(){
-		setTimeout(function(){
-			_tizai.html("<img src='./resource/three.gif'>");
-		},200);
-	});
-	_tizai.animate({
-		top: 471,
-		left: 166
-	}, 2000,function(){
-		change(e);
-		if(type == 0){
-			answer_q();
-		}
-	});
+	},2550);
 }
 
 function change(mode) { //改变梯仔gif的函数
