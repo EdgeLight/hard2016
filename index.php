@@ -41,7 +41,7 @@ $signPackage = $jssdk->GetSignPackage();
 		(function() {
 		var hm = document.createElement("script");
 		hm.src = "//hm.baidu.com/hm.js?b737f2241599898a5542ba8d7a3d5f79";
-		var s = document.getElementsByTagName("script")[0]; 
+		var s = document.getElementsByTagName("script")[0];
 		s.parentNode.insertBefore(hm, s);
 		})();
 	</script>
@@ -49,42 +49,42 @@ $signPackage = $jssdk->GetSignPackage();
 <body>
     <!-- 地图 -->
   	<div id="bg">
-  		<img src="resource/01.png" alt="" class="bg bg_01">
-  		<img src="resource/02.png" alt="" class="bg bg_02">
-  		<img src="resource/03.png" alt="" class="bg bg_03">
-  		<img src="resource/04.png" alt="" class="bg bg_04">
-  		<img src="resource/05.png" alt="" class="bg bg_05">
-  		<img src="resource/06.png" alt="" class="bg bg_06">
-  		<img src="resource/07.png" alt="" class="bg bg_07">
-  		<img src="resource/08.png" alt="" class="bg bg_08">
-  		<img src="resource/09.png" alt="" class="bg bg_09">
-  		<img src="resource/10.png" alt="" class="bg bg_10">
-  		<img src="resource/11.png" alt="" class="bg bg_11">
-  		<img src="resource/12.png" alt="" class="bg bg_12">
-  		<img src="resource/13.png" alt="" class="bg bg_13">
-  		<img src="resource/14.png" alt="" class="bg bg_14">
-  		<img src="resource/15.png" alt="" class="bg bg_15">
-  		<img src="resource/16.png" alt="" class="bg bg_16">
-  		<img src="resource/17.png" alt="" class="bg bg_17">
-  		<img src="resource/18.png" alt="" class="bg bg_18">
-  		<img src="resource/19.png" alt="" class="bg bg_19">
-  		<img src="resource/20.png" alt="" class="bg bg_20">
-  		<img src="resource/21.png" alt="" class="bg bg_21">
-  		<img src="resource/22.png" alt="" class="bg bg_22">
-  		<img src="resource/23.png" alt="" class="bg bg_23">
-  		<img src="resource/24.png" alt="" class="bg bg_24">
-  		<img src="resource/25.png" alt="" class="bg bg_25">
-  		<img src="resource/26.png" alt="" class="bg bg_26">
-  		<img src="resource/27.png" alt="" class="bg bg_27">
-  		<img src="resource/28.png" alt="" class="bg bg_28">
-  		<img src="resource/29.png" alt="" class="bg bg_29">
-  		<img src="resource/30.png" alt="" class="bg bg_30">
-  		<img src="resource/31.png" alt="" class="bg bg_31">
-  		<img src="resource/32.png" alt="" class="bg bg_32">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/01.png" alt="" class="bg bg_01">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/02.png" alt="" class="bg bg_02">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/03.png" alt="" class="bg bg_03">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/04.png" alt="" class="bg bg_04">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/05.png" alt="" class="bg bg_05">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/06.png" alt="" class="bg bg_06">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/07.png" alt="" class="bg bg_07">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/08.png" alt="" class="bg bg_08">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/09.png" alt="" class="bg bg_09">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/10.png" alt="" class="bg bg_10">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/11.png" alt="" class="bg bg_11">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/12.png" alt="" class="bg bg_12">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/13.png" alt="" class="bg bg_13">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/14.png" alt="" class="bg bg_14">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/15.png" alt="" class="bg bg_15">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/16.png" alt="" class="bg bg_16">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/17.png" alt="" class="bg bg_17">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/18.png" alt="" class="bg bg_18">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/19.png" alt="" class="bg bg_19">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/20.png" alt="" class="bg bg_20">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/21.png" alt="" class="bg bg_21">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/22.png" alt="" class="bg bg_22">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/23.png" alt="" class="bg bg_23">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/24.png" alt="" class="bg bg_24">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/25.png" alt="" class="bg bg_25">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/26.png" alt="" class="bg bg_26">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/27.png" alt="" class="bg bg_27">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/28.png" alt="" class="bg bg_28">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/29.png" alt="" class="bg bg_29">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/30.png" alt="" class="bg bg_30">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/31.png" alt="" class="bg bg_31">
+  		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/32.png" alt="" class="bg bg_32">
   	</div>
 	<!-- 梯仔 -->
 	<div id="tizai">
-		<img id="tizai_img" src="./resource/one.gif">
+		<img id="tizai_img" src="http://o7h8dnfqo.bkt.clouddn.com/resource/one.gif">
 	</div>
   <!-- 开始 游戏规则页面 -->
 	<div class="rule popover">
@@ -174,7 +174,7 @@ $signPackage = $jssdk->GetSignPackage();
 		<div class="button restartBtn" data-rippleria><p>重新开始</p></div>
 		<div class="pic_replace"></div>
 		<div class="picture">
-			<img class="daxue" src="resource/大学.png">
+			<img class="daxue" src="http://o7h8dnfqo.bkt.clouddn.com/resource/大学.png">
 		</div>
 	</div>
 
@@ -187,7 +187,7 @@ $signPackage = $jssdk->GetSignPackage();
 		<div class="button restartBtn" data-rippleria><p>重新开始</p></div>
 		<div class="pic_replace"></div>
 		<div class="picture">
-			<img src="resource/附中.png">
+			<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/附中.png">
 		</div>
 	</div>
 
@@ -202,7 +202,7 @@ $signPackage = $jssdk->GetSignPackage();
 		<div class="button restartBtn" data-rippleria><p>重新开始</p></div>
 		<div class="pic_replace"></div>
 		<div class="picture">
-			<img src="resource/小学.png">
+			<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/小学.png">
 		</div>
 	</div>
 
@@ -215,7 +215,7 @@ $signPackage = $jssdk->GetSignPackage();
 		<div class="button restartBtn" data-rippleria><p>重新开始</p></div>
 		<div class="pic_replace"></div>
 		<div class="picture">
-			<img src="resource/幼儿园.png">
+			<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/幼儿园.png">
 		</div>
 	</div>
 

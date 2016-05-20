@@ -1,6 +1,6 @@
 @font-face{
 	font-family: myFont;
-	src: url('../resource/方正正纤黑简体.ttf');
+	src: url('http://o7h8dnfqo.bkt.clouddn.com/resource/方正正纤黑简体.ttf');
 }
 @media screen and (max-height: 550px) {
 	body{

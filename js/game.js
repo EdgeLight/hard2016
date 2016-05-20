@@ -15,7 +15,7 @@ var news = {
 	"Title" : "毕业之旅",
 	"Description" : "本宝宝不服，机智如我竟然才华工幼儿园毕业？",
 	"Url" : "",
-	"PicUrl" : "http://graduation.100steps.net/hard2016/resource/youeryuan.png"
+	"PicUrl" : "http://o7h8dnfqo.bkt.clouddn.com/resource/youeryuan.png"
 };
 if (area == 'north') {
 	news['Url'] = 'http://graduation.100steps.net/alumni2016/index.php/Index/game?location=north';
@@ -47,16 +47,16 @@ function update_share() {
 	}
 	if (score <= 5) {
 		news['Description'] = "本宝宝不服，机智如我竟然才华工幼儿园毕业？";
-		news['PicUrl'] = "http://graduation.100steps.net/hard2016/resource/youeryuan.png";
+		news['PicUrl'] = "http://o7h8dnfqo.bkt.clouddn.com/resource/youeryuan.png";
   }else if (score >= 6 && score <= 9) {
 		news['Description'] = "读了十几年书居然才是华工小学生？不服！";
-		news['PicUrl'] = "http://graduation.100steps.net/hard2016/resource/xiaoxue.png";
+		news['PicUrl'] = "http://o7h8dnfqo.bkt.clouddn.com/resource/xiaoxue.png";
   }else if (score >= 10 && score <= 12) {
 		news['Description'] = "学富五车的我还是嫩嫩的华工高中生！";
-		news['PicUrl'] = "http://graduation.100steps.net/hard2016/resource/zhongxue.png";
+		news['PicUrl'] = "http://o7h8dnfqo.bkt.clouddn.com/resource/zhongxue.png";
   }else if (score >= 13) {
 		news['Description'] = "本宝宝可是名正言顺从华工毕业！";
-		news['PicUrl'] = "http://graduation.100steps.net/hard2016/resource/daxue.png";
+		news['PicUrl'] = "http://o7h8dnfqo.bkt.clouddn.com/resource/daxue.png";
   }
 		//分享给朋友
 		wx.onMenuShareAppMessage({
@@ -423,15 +423,15 @@ point[24] = {
 
 
 $(document).ready(function() {
-	loadImage('./resource/one.gif', function(){              //调用图片预加载函数
+	loadImage('http://o7h8dnfqo.bkt.clouddn.com/resource/one.gif', function(){              //调用图片预加载函数
 	});
-	loadImage('./resource/two.gif', function(){
+	loadImage('http://o7h8dnfqo.bkt.clouddn.com/resource/two.gif', function(){
 	});
-	loadImage('./resource/three.gif', function(){
+	loadImage('http://o7h8dnfqo.bkt.clouddn.com/resource/three.gif', function(){
 	});
-	loadImage('./resource/four.gif', function(){
+	loadImage('http://o7h8dnfqo.bkt.clouddn.com/resource/four.gif', function(){
 	});
-	loadImage('./resource/five.gif', function(){
+	loadImage('http://o7h8dnfqo.bkt.clouddn.com/resource/five.gif', function(){
 	});
 
 	$(".startBtn").click(function() {                                     //开始按钮点击后（传一次ajax）
@@ -513,7 +513,7 @@ function jump(type) { //梯仔跳跃动画函数
 	_tizai.css("-webkit-animation-timing-function","linear");
 
 	setTimeout(function(){
-		_tizai.html("<img src='./resource/three.gif'>");
+		_tizai.html("<img src='http://o7h8dnfqo.bkt.clouddn.com/resource/three.gif'>");
 	},1050);
 
 	_tizai.on("webkitAnimationEnd", function(){ //动画结束时事件
@@ -533,34 +533,34 @@ function jump(type) { //梯仔跳跃动画函数
 
 function change(mode) { //改变梯仔gif的函数
 	if (mode == 5) {                                         //jump更换
-		_tizai.html("<img src='./resource/two.gif'>");
+		_tizai.html("<img src='http://o7h8dnfqo.bkt.clouddn.com/resource/two.gif'>");
 			setTimeout(function() {
-				_tizai.html("<img src='./resource/one.gif'>");
+				_tizai.html("<img src='http://o7h8dnfqo.bkt.clouddn.com/resource/one.gif'>");
 			}, 800);
 		}
 	if (mode == 7) {
-		_tizai.html("<img src='./resource/four.gif'>");
+		_tizai.html("<img src='http://o7h8dnfqo.bkt.clouddn.com/resource/four.gif'>");
 	}
 	if(mode == 8) {
-		_tizai.html("<img src='./resource/one.gif'>");
+		_tizai.html("<img src='http://o7h8dnfqo.bkt.clouddn.com/resource/one.gif'>");
 	}
 	if (mode == 10) {
-		_tizai.html("<img src='./resource/four.gif'>");
+		_tizai.html("<img src='http://o7h8dnfqo.bkt.clouddn.com/resource/four.gif'>");
 	}
 	if(mode == 11){
-		_tizai.html("<img src='./resource/five.gif'>");
+		_tizai.html("<img src='http://o7h8dnfqo.bkt.clouddn.com/resource/five.gif'>");
 	}
 	if (mode == 14) {
-		_tizai.html("<img src='./resource/four.gif'>");
+		_tizai.html("<img src='http://o7h8dnfqo.bkt.clouddn.com/resource/four.gif'>");
 	}
 	if(mode == 15){
-		_tizai.html("<img src='./resource/one.gif'>");
+		_tizai.html("<img src='http://o7h8dnfqo.bkt.clouddn.com/resource/one.gif'>");
 	}
 	if (mode == 19) {
-		_tizai.html("<img src='./resource/four.gif'>");
+		_tizai.html("<img src='http://o7h8dnfqo.bkt.clouddn.com/resource/four.gif'>");
 	}
 	if(mode == 21){
-		_tizai.html("<img src='./resource/five.gif'>");
+		_tizai.html("<img src='http://o7h8dnfqo.bkt.clouddn.com/resource/five.gif'>");
 	}
 }
 function loadImage(url, callback) {     //图片预加载
