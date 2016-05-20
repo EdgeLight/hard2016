@@ -36,6 +36,15 @@ $signPackage = $jssdk->GetSignPackage();
 	<link rel="stylesheet" type="text/css" href="style/jquery.rippleria.min.css">
 	<link rel="stylesheet" type="text/css" href="style/style.css">
 	<title>毕业之旅</title>
+	<script>
+		var _hmt = _hmt || [];
+		(function() {
+		var hm = document.createElement("script");
+		hm.src = "//hm.baidu.com/hm.js?b737f2241599898a5542ba8d7a3d5f79";
+		var s = document.getElementsByTagName("script")[0]; 
+		s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
 </head>
 <body>
     <!-- 地图 -->
