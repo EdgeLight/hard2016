@@ -452,9 +452,9 @@ $(document).ready(function() {
 	$(".restartBtn").click(function() {                                   //再来一次按钮
 		setTimeout(function() {
 			if (area == 'north') {
-				location.replace('http://graduation.100steps.net/alumni2016/index.php/Index/game?location=north');
+				location.replace('http://graduation.100steps.net/hard2016/index.php/Index/game?location=north');
 			}else {
-				location.replace('http://graduation.100steps.net/alumni2016/index.php/Index/game?location=south');
+				location.replace('http://graduation.100steps.net/hard2016/index.php/Index/game?location=south');
 			}
 		},280)
 	})
