@@ -145,7 +145,7 @@ function input_ques(){
 //注册确定按钮
 $("#sub").on("click",function() {
   if (answer !='' && isanswer == false) {
-    isanswer = true;
+    isanswer = true;                                          //锁定提交
 		setTimeout(function() {
 			$("#qabox").hide();
 		},280)
@@ -153,7 +153,7 @@ $("#sub").on("click",function() {
 		overtime = 1;
     setTimeout(function() {                                  //防止AJAX传得过快导致同一题发送了两次
       ajax_start();                                          //有选项被选择时，单击确定按钮提交答案(AJAX)
-    },800)
+    },80)
   }
 })
 //判断对错
@@ -219,7 +219,6 @@ function timedown_start() {
 //答题开始(已经在答题点)
 function answer_q(){
 	$("#qabox").show();                                      //显示问答框架
-	isanswer = false;                                        //解锁提交
 	timedown_start();                                        //倒计时开始
 }
 //ajax返回后执行的函数
@@ -436,12 +435,14 @@ $(document).ready(function() {
 	});
 
 	$(".startBtn").click(function() {                                     //开始按钮点击后（传一次ajax）
-		setTimeout(function() {
-			$(".rule").hide();                                                //关闭开始提示
-		},280)
-		setTimeout(function() {
-			ajax_start();                                                     //通过AJAX取得题号
-		},120)
+		if (isanswer == false) {
+			setTimeout(function() {
+				$(".rule").hide();                                                //关闭开始提示
+			},280)
+			setTimeout(function() {
+				ajax_start();                                                     //通过AJAX取得题号
+			},120)
+		}
 	});
 	$(".nextBtn").click(function() {                                      //继续按钮
 		setTimeout(function() {
