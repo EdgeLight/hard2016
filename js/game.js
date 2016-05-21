@@ -235,6 +235,7 @@ function ajax_over() {
   }
 	if (status == 'start') {                                 //第一题情况下，延迟作答
 		setTimeout(function() {
+			isanswer = false;                                    //解锁第一题
 	    answer_q();
 		},40)
 	}
@@ -437,11 +438,12 @@ $(document).ready(function() {
 
 	$(".startBtn").click(function() {                                     //开始按钮点击后（传一次ajax）
 		if (isanswer == false) {
+			isanswer = true;                                                  //锁定开始按钮
 			setTimeout(function() {
-				$(".rule").hide();                                                //关闭开始提示
+				$(".rule").hide();                                               //关闭开始提示
 			},280)
 			setTimeout(function() {
-				ajax_start();                                                     //通过AJAX取得题号
+				ajax_start();                                                    //通过AJAX取得题号
 			},120)
 		}
 	});
