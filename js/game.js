@@ -221,7 +221,7 @@ function timedown_start() {
 function answer_q(){
 	$("#qabox").show();                                      //显示问答框架
 	isanswer = false;                                        //解锁提交
-	isnext == false;                                         //解锁继续按钮
+	isnext = false;                                          //解锁继续按钮
 	timedown_start();                                        //倒计时开始
 }
 //ajax返回后执行的函数
