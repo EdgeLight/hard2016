@@ -8,6 +8,7 @@ var timedown = 29;                    //倒计时显示时间(比总时间少1)
 var isanswer = false;                 //点击确定按钮提交后锁定计时器
 var td;                               //声明倒计时器
 var area = 'north';                   //南北校
+var isnext = false;                   //下一题按钮锁
 //--------------------------------------------------------------//
 area = window.location.href.split('location=')[1];              //获取南北校标志
 //设置分享默认
@@ -219,7 +220,8 @@ function timedown_start() {
 //答题开始(已经在答题点)
 function answer_q(){
 	$("#qabox").show();                                      //显示问答框架
-	isanswer = false;                                      //解锁提交
+	isanswer = false;                                        //解锁提交
+	isnext == false;                                         //解锁继续按钮
 	timedown_start();                                        //倒计时开始
 }
 //ajax返回后执行的函数
@@ -448,11 +450,13 @@ $(document).ready(function() {
 		}
 	});
 	$(".nextBtn").click(function() {                                      //继续按钮
-		setTimeout(function() {
-			$(".result").hide();
-			e++;
-			moveTo( point[e].type );
-		},260)
+		if (isnext == false) {                                              //继续按钮未被锁定时
+			setTimeout(function() {
+				$(".result").hide();
+				e++;
+				moveTo( point[e].type );
+			},260)
+		}
 	});
 	$(".restartBtn").click(function() {                                   //再来一次按钮
 		setTimeout(function() {
