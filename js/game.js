@@ -451,6 +451,7 @@ $(document).ready(function() {
 	});
 	$(".nextBtn").click(function() {                                      //继续按钮
 		if (isnext == false) {                                              //继续按钮未被锁定时
+			isnext = true;
 			setTimeout(function() {
 				$(".result").hide();
 				e++;
