@@ -496,7 +496,7 @@ function moveTo(type) {
 			e++;
 			moveTo(point[e].type);
 		}
-	}, time+50);
+	}, time+80);
 }
 
 function walk(X,Y,type,time) { //梯仔水平运动动画函数
