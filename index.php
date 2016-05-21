@@ -1,30 +1,30 @@
 <?php
-header("Content-Type: text/html; charset=UTF-8");
-session_start();
-$start_time = '1463760000'; // 开始时间5月21号00:00
-$end_time = '1464623999'; // 结束时间5月30号23:59
-if (time() >= $end_time) {
-    echo "<script>alert(\"勇斩各路丧病考题\n你成功走完毕业之旅了吗？\n百步梯，创新只为与你分享\n我们明年再见\");</script>";
-    exit();
-} else if (time() <= $start_time) {
-    echo "<script>alert(\"活动尚未开始，感谢您的关注\");</script>";
-    exit();
-}
-if (strpos(addslashes($_SERVER['HTTP_USER_AGENT']), 'MicroMessenger') != false) {
-    if (empty($_GET['wechatId']) || empty($_GET['location'])) {
-        echo "<script>alert(\"系统出现错误\");</script>";
-        exit();
-    }
-    $_SESSION['wechat_id'] = $_GET['wechatId'];
-    $_SESSION['location'] = $_GET['location'];
-} else {
-    echo "<script>alert(\"请从微信端登录\");</script>";
-    exit();
-}
-require "jssdk.php";
-$jssdk = new JSSDK("wx72dcc0c8ae1265f9", "ec008dac2e11c2b893366ca77bb7b4d0");
-// $jssdk = new JSSDK("wxd25012bb1da2b4cf", "d4624c36b6795d1d99dcf0547af5443d");
-$signPackage = $jssdk->GetSignPackage();
+// header("Content-Type: text/html; charset=UTF-8");
+// session_start();
+// $start_time = '1463760000'; // 开始时间5月21号00:00
+// $end_time = '1464623999'; // 结束时间5月30号23:59
+// if (time() >= $end_time) {
+//     echo "<script>alert(\"勇斩各路丧病考题\n你成功走完毕业之旅了吗？\n百步梯，创新只为与你分享\n我们明年再见\");</script>";
+//     exit();
+// } else if (time() <= $start_time) {
+//     echo "<script>alert(\"活动尚未开始，感谢您的关注\");</script>";
+//     exit();
+// }
+// if (strpos(addslashes($_SERVER['HTTP_USER_AGENT']), 'MicroMessenger') != false) {
+//     if (empty($_GET['wechatId']) || empty($_GET['location'])) {
+//         echo "<script>alert(\"系统出现错误\");</script>";
+//         exit();
+//     }
+//     $_SESSION['wechat_id'] = $_GET['wechatId'];
+//     $_SESSION['location'] = $_GET['location'];
+// } else {
+//     echo "<script>alert(\"请从微信端登录\");</script>";
+//     exit();
+// }
+// require "jssdk.php";
+// $jssdk = new JSSDK("wx72dcc0c8ae1265f9", "ec008dac2e11c2b893366ca77bb7b4d0");
+// // $jssdk = new JSSDK("wxd25012bb1da2b4cf", "d4624c36b6795d1d99dcf0547af5443d");
+// $signPackage = $jssdk->GetSignPackage();
 
 ?>
 <!DOCTYPE html>
@@ -46,7 +46,12 @@ $signPackage = $jssdk->GetSignPackage();
 		})();
 	</script>
 </head>
-<body>
+<body onload="loader()">
+  <div id="loader">
+     <img class="loader" src="http://o7h8dnfqo.bkt.clouddn.com/resource/four.gif"/>
+		 <div class="loader_word"><p>梯仔正在路上…</p></div>
+  </div>
+  <div id="main" style="display:none">
     <!-- 地图 -->
   	<div id="bg">
   		<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/01.png" alt="" class="bg bg_01">
@@ -218,13 +223,14 @@ $signPackage = $jssdk->GetSignPackage();
 			<img src="http://o7h8dnfqo.bkt.clouddn.com/resource/幼儿园.png">
 		</div>
 	</div>
+</div>
 
 	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="js/jquery.rippleria.min.js"></script>
 	<script type="text/javascript" src="js/question.js"></script>
 	<script type="text/javascript" src="js/game.js"></script>
 	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 	wx.config({
 		debug:false,//调试选true
 		appId: '<?php echo $signPackage["appId"]; ?>',
@@ -278,7 +284,7 @@ $signPackage = $jssdk->GetSignPackage();
 				}
 			});
 		});
-</script>
+</script> -->
 
 
 </body>

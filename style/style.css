@@ -637,3 +637,18 @@ body {
 		left: -1016px;
 	}
 }
+
+/*加载画面*/
+.loader{
+  width: 118px;
+	height: 142px;
+	display: block;
+	margin: 165px auto 0px auto;
+
+}
+.loader_word{
+  color: rgb(255, 255, 255);
+	font-size: 24px;
+	margin: 30px auto 0px auto;
+	text-align: center;
+}
