@@ -540,7 +540,7 @@ function jump(type) { //梯仔跳跃动画函数
 		_tizai.css("-webkit-transition-timing-function","ease-in");
 	},1000);
 	setTimeout(function(){
-		_tizai.html("<img src='./resource/two.gif'>")
+		_tizai.html("<img src='http://o7h8dnfqo.bkt.clouddn.com/resource/two.gif'>");
 	},2550);
 	setTimeout(function(){
 		change(e);
