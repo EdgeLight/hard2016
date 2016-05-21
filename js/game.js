@@ -476,21 +476,21 @@ $(document).ready(function() {
 });
 
 function moveTo(type) {
-
+	
 	if(e == 5){
 		jump(point[e].type);         //跳
 	}else{
-		//计算运动时间
 		if (e == 8 || e == 11 || e == 15 || e == 20 || e == 21) {
 			var distance = (point[e].top - point[e-1].top) > 0 ? (point[e].top - point[e-1].top) : (point[e-1].top - point[e].top);
-			var time = Math.floor(distance/tizai.speed);
 		}else{
 			var distance = (point[e].left - point[e-1].left) > 0 ? (point[e].left - point[e-1].left) : (point[e-1].left - point[e].left);
-			var time = Math.floor(distance/tizai.speed);
-		}
-		walk(point[e].type,time);     //走
+		}			
+		var time = Math.floor(distance/tizai.speed);
+		var X = (tizai.left - point[e].left) + "px";
+		var Y = (tizai.top - point[e].top) + "px";
+		walk(X,Y,point[e].type,time);       //走
 	}
-
+	
 	setTimeout(function() {
 		if (type == 1) {
 			e++;
@@ -499,14 +499,14 @@ function moveTo(type) {
 	}, time+50);
 }
 
-function walk(type,time) { //梯仔水平运动动画函数
+function walk(X,Y,type,time) { //梯仔水平运动动画函数
+	var duration = time + "ms";
 
-	var an_num = "bgMove"+e;
-	var duration = time+"ms";
-	_bg.css("-webkit-animation-name",an_num);
-	_bg.css("-webkit-animation-duration",duration);
-	_bg.css("-webkit-animation-fill-mode","both");
-	_bg.css("-webkit-animation-timing-function","linear");
+	_bg.css("-webkit-transform",'translate('+X+','+Y+')');
+	_bg.css("-webkit-transition-property","-webkit-transform");
+	_bg.css("-webkit-transition-duration",duration);
+	_bg.css("-webkit-transition-timing-function","linear");
+	
 	setTimeout(function(){
 		change(e);
 		if(type == 0){
@@ -516,43 +516,44 @@ function walk(type,time) { //梯仔水平运动动画函数
 }
 
 function jump(type) { //梯仔跳跃动画函数
+	var X = (tizai.left - point[e].left)+"px";
+	var Y = (tizai.top - point[e].top)+"px";
 
-	_bg.css("-webkit-animation-name","bgMove5");
-	_bg.css("-webkit-animation-duration","1s");
-	_bg.css("-webkit-animation-fill-mode","both");
-	_bg.css("-webkit-animation-timing-function","linear");
-
-	_tizai.css("-webkit-animation-name","tizaiMove5-1");
-	_tizai.css("-webkit-animation-duration","1s");
-	_tizai.css("-webkit-animation-fill-mode","both");
-	_tizai.css("-webkit-animation-timing-function","linear");
-
+	_bg.css("-webkit-transform",'translate('+X+','+Y+')');
+	_bg.css("-webkit-transition-property","-webkit-transform")
+	_bg.css("-webkit-transition-duration","1s")
+	_bg.css("-webkit-transition-timing-function","linear");
+	
+	_tizai.css("-webkit-transform",'translate(-66px,-201px)');
+	_tizai.css("-webkit-transition-property","-webkit-transform")
+	_tizai.css("-webkit-transition-duration","1s")
+	_tizai.css("-webkit-transition-timing-function","linear");
+	
 	setTimeout(function(){
 		_tizai.html("<img src='http://o7h8dnfqo.bkt.clouddn.com/resource/three.gif'>");
 	},1050);
-
-	_tizai.on("webkitAnimationEnd", function(){ //动画结束时事件
-		_tizai.css("-webkit-animation-name","tizaiMove5-2");
-		_tizai.css("-webkit-animation-duration","1.5s");
-		_tizai.css("-webkit-animation-fill-mode","both");
-		_tizai.css("-webkit-animation-timing-function","ease-in");
-	});
-
+	
+	setTimeout(function(){
+		_tizai.css("-webkit-transform",'translate(0,0)');
+		_tizai.css("-webkit-transition-property","-webkit-transform")
+		_tizai.css("-webkit-transition-duration","1.5s")
+		_tizai.css("-webkit-transition-timing-function","ease-in");
+	},1000);
+	setTimeout(function(){
+		_tizai.html("<img src='./resource/two.gif'>")
+	},2550);
 	setTimeout(function(){
 		change(e);
 		if(type == 0){
 			answer_q();
 		}
-	},2550);
+	},3350);
 }
 
 function change(mode) { //改变梯仔gif的函数
 	if (mode == 5) {                                         //jump更换
-		_tizai.html("<img src='http://o7h8dnfqo.bkt.clouddn.com/resource/two.gif'>");
-			setTimeout(function() {
-				_tizai.html("<img src='http://o7h8dnfqo.bkt.clouddn.com/resource/one.gif'>");
-			}, 800);
-		}
+		_tizai.html("<img src='http://o7h8dnfqo.bkt.clouddn.com/resource/one.gif'>");
+	}
 	if (mode == 7) {
 		_tizai.html("<img src='http://o7h8dnfqo.bkt.clouddn.com/resource/four.gif'>");
 	}
@@ -578,6 +579,7 @@ function change(mode) { //改变梯仔gif的函数
 		_tizai.html("<img src='http://o7h8dnfqo.bkt.clouddn.com/resource/five.gif'>");
 	}
 }
+
 function loadImage(url, callback) {     //图片预加载
     var img = new Image();
     img.onload = function(){
