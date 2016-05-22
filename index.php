@@ -48,8 +48,8 @@ $signPackage = $jssdk->GetSignPackage();
 </head>
 <body onload="loader()">
   <div id="loader">
-     <img class="loader" src="http://o7h8dnfqo.bkt.clouddn.com/resource/four.gif"/>
-		 <div class="loader_word"><p>梯仔正在路上…</p></div>
+     <img src="http://o7h8dnfqo.bkt.clouddn.com/resource/four.gif" style="width:118px;height: 142px;display: block;margin: 165px auto 0px auto;"/>
+		 <img src="http://o7h8dnfqo.bkt.clouddn.com/resource/loadtext.png" style="width:197px;height: 27px;display: block;margin: 50px auto 0px auto;"/>
   </div>
   <div id="main" style="display:none">
     <!-- 地图 -->

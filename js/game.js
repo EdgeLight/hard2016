@@ -1,7 +1,20 @@
-//加载动画
-function loader() {
+//加载动画最小持续时间
+var isload = false;                //是否已经加载完成
+var istime = false;                //是否达到最小加载时间
+setTimeout(function() {
+	istime = true;
+	if (isload == true) {
 		$("#loader").hide();
 		$("#main").show();
+	}
+},3000)
+//完成加载动画
+function loader() {
+  isload = true;
+	if (istime == true) {
+		$("#loader").hide();
+		$("#main").show();
+	}
 }
 //---------------------前后端交互用变量---------------------------//
 var score = 0;                        //位置/分数
