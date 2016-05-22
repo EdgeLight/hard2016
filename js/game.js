@@ -57,10 +57,10 @@ function update_share() {
   }else if (score >= 6 && score <= 9) {
 		news['Description'] = "读了十几年书居然才是华工小学生？不服！";
 		news['PicUrl'] = "http://o7h8dnfqo.bkt.clouddn.com/resource/xiaoxue.png";
-  }else if (score >= 10 && score <= 12) {
+  }else if (score >= 10 && score <= 14) {
 		news['Description'] = "学富五车的我还是嫩嫩的华工高中生！";
 		news['PicUrl'] = "http://o7h8dnfqo.bkt.clouddn.com/resource/zhongxue.png";
-  }else if (score >= 13) {
+  }else if (score >= 15) {
 		news['Description'] = "本宝宝可是名正言顺从华工毕业！";
 		news['PicUrl'] = "http://o7h8dnfqo.bkt.clouddn.com/resource/daxue.png";
   }
@@ -476,7 +476,7 @@ $(document).ready(function() {
 });
 
 function moveTo(type) {
-	
+
 	if(e == 5){
 		jump(point[e].type);         //跳
 	}else{
@@ -484,13 +484,13 @@ function moveTo(type) {
 			var distance = (point[e].top - point[e-1].top) > 0 ? (point[e].top - point[e-1].top) : (point[e-1].top - point[e].top);
 		}else{
 			var distance = (point[e].left - point[e-1].left) > 0 ? (point[e].left - point[e-1].left) : (point[e-1].left - point[e].left);
-		}			
+		}
 		var time = Math.floor(distance/tizai.speed);
 		var X = (tizai.left - point[e].left) + "px";
 		var Y = (tizai.top - point[e].top) + "px";
 		walk(X,Y,point[e].type,time);       //走
 	}
-	
+
 	setTimeout(function() {
 		if (type == 1) {
 			e++;
@@ -506,7 +506,7 @@ function walk(X,Y,type,time) { //梯仔水平运动动画函数
 	_bg.css("-webkit-transition-property","-webkit-transform");
 	_bg.css("-webkit-transition-duration",duration);
 	_bg.css("-webkit-transition-timing-function","linear");
-	
+
 	setTimeout(function(){
 		change(e);
 		if(type == 0){
@@ -523,16 +523,16 @@ function jump(type) { //梯仔跳跃动画函数
 	_bg.css("-webkit-transition-property","-webkit-transform")
 	_bg.css("-webkit-transition-duration","1s")
 	_bg.css("-webkit-transition-timing-function","linear");
-	
+
 	_tizai.css("-webkit-transform",'translate(-66px,-201px)');
 	_tizai.css("-webkit-transition-property","-webkit-transform")
 	_tizai.css("-webkit-transition-duration","1s")
 	_tizai.css("-webkit-transition-timing-function","linear");
-	
+
 	setTimeout(function(){
 		_tizai.html("<img src='http://o7h8dnfqo.bkt.clouddn.com/resource/three.gif'>");
 	},1050);
-	
+
 	setTimeout(function(){
 		_tizai.css("-webkit-transform",'translate(0,0)');
 		_tizai.css("-webkit-transition-property","-webkit-transform")
