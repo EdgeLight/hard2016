@@ -48,7 +48,7 @@ $signPackage = $jssdk->GetSignPackage();
 </head>
 <body onload="loader()">
   <div id="loader">
-     <img src="http://o7h8dnfqo.bkt.clouddn.com/resource/four.gif" style="width:118px;height: 142px;display: block;margin: 165px auto 0px auto;"/>
+     <img src="http://o7h8dnfqo.bkt.clouddn.com/resource/four.gif" style="width:118px;height: 142px;display: block;margin: 28% auto 0px auto;"/>
 		 <img src="http://o7h8dnfqo.bkt.clouddn.com/resource/loadtext.png" style="width:197px;height: 27px;display: block;margin: 50px auto 0px auto;"/>
   </div>
   <div id="main" style="display:none">
@@ -230,7 +230,7 @@ $signPackage = $jssdk->GetSignPackage();
 	<script type="text/javascript" src="js/question.js"></script>
 	<script type="text/javascript" src="js/game.js"></script>
 	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 	wx.config({
 		debug:false,//调试选true
 		appId: '<?php echo $signPackage["appId"]; ?>',
@@ -284,7 +284,7 @@ $signPackage = $jssdk->GetSignPackage();
 				}
 			});
 		});
-</script>
+</script> -->
 
 
 </body>

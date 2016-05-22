@@ -7,7 +7,7 @@ setTimeout(function() {
 		$("#loader").hide();
 		$("#main").show();
 	}
-},3000)
+},1000)
 //完成加载动画
 function loader() {
   isload = true;
