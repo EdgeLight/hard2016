@@ -285,10 +285,10 @@ function achievement_show() {
   }else if (score >= 6 && score <= 9) {
 		$(".title").html('哈哈 答对了' + score + '题');
 		$("#xiaoxue").show();
-  }else if (score >= 10 && score <= 12) {
+  }else if (score >= 10 && score <= 14) {
 		$(".title").html('真棒！答对' + score + '题');
 		$("#zhongxue").show();
-  }else if (score >= 13) {
+  }else if (score >= 15) {
 		$("#daxue").show();
   }
 }
